@@ -54,12 +54,9 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Ability\Ability.cs" />
-     <Compile Include="Assets\Scripts\b_ActorWorld.cs" />
-     <Compile Include="Assets\Scripts\b_CameraDungeon.cs" />
      <Compile Include="Assets\Scripts\b_Character.cs" />
      <Compile Include="Assets\Scripts\b_CharacterGenerator.cs" />
      <Compile Include="Assets\Scripts\b_Inventory.cs" />
-     <Compile Include="Assets\Scripts\b_PlayerWorld.cs" />
      <Compile Include="Assets\Scripts\b_WeaponGenerator.cs" />
      <Compile Include="Assets\Scripts\BattleField.cs" />
      <Compile Include="Assets\Scripts\CharacterTrait.cs" />
@@ -70,7 +67,12 @@
      <Compile Include="Assets\Scripts\Skill.cs" />
      <Compile Include="Assets\Scripts\Util\DB.cs" />
      <Compile Include="Assets\Scripts\Util\Util.cs" />
+     <Compile Include="Assets\Scripts\Util\WorldHelper.cs" />
      <Compile Include="Assets\Scripts\Weapon.cs" />
+     <Compile Include="Assets\Scripts\World\b_ActorWorld.cs" />
+     <Compile Include="Assets\Scripts\World\b_CameraDungeon.cs" />
+     <Compile Include="Assets\Scripts\World\b_InteractibleWorld.cs" />
+     <Compile Include="Assets\Scripts\World\b_PlayerWorld.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/Megapoort/Desktop/Bhrachán/Bhrachán/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
