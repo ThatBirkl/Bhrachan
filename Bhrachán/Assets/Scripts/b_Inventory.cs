@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Type = TypeEnums;
 
-public class b_Inventory : MonoBehaviour
+public class b_Inventory
 {
     Dictionary<Item, int> inventory; //Item and amount
     string characterId; //owner of this inventory
     float capacity; //probably derived from player stat
     float weight;
+
+    public b_Inventory(string id)
+    {
+        characterId = id;
+        Load();
+    }
 
     void Start ()
     {
@@ -43,7 +49,7 @@ public class b_Inventory : MonoBehaviour
      * 
      * @return Returns if the item was added or not
      */
-    bool Add(Item item, int amount)
+    public bool Add(Item item, int amount)
     {
         if (weight + (item.GetWeight() * amount) > capacity)
         {
@@ -105,5 +111,17 @@ public class b_Inventory : MonoBehaviour
         }
 
         return false;
+    }
+
+    /*
+     * Adds one item of a type to the inventory
+     * 
+     * @param item The item that should be added
+     * 
+     * @return Returns if the item was added or not
+     */
+    public bool Add(Item item)
+    {
+        return Add(item, 1);
     }
 }

@@ -7,7 +7,7 @@ using DAMAGE = Meta.Weapon.Damage;
 
 public class b_WeaponGenerator : MonoBehaviour
 {
-    public Weapon GenerateCompletlyRandomWeapon()
+    public static Weapon GenerateCompletlyRandomWeapon()
     {
         Type.WeaponType type = (Type.WeaponType)Random.Range(0, 4);
 
@@ -15,21 +15,20 @@ public class b_WeaponGenerator : MonoBehaviour
         {
             case Type.WeaponType.sword:
                 return GenerateRandomSword();
-                break;
             default:
                 return GenerateRandomSword();
         }
     }
 
     //--------------------------------SWORD-------------------------------//
-    public Weapon.Sword GenerateRandomSword()
+    public static Weapon.Sword GenerateRandomSword()
     {
         Type.Tier tier = (Type.Tier)Random.Range(0, 4);
 
         return GenerateSword(tier);
     }
 
-    public Weapon.Sword GenerateSword(Type.Tier _tier)
+    public static Weapon.Sword GenerateSword(Type.Tier _tier)
     {
         int damage = 0;
 
@@ -56,7 +55,7 @@ public class b_WeaponGenerator : MonoBehaviour
         return GenerateSword(_tier, damage, weight);
     }
 
-    public Weapon.Sword GenerateSword(Type.Tier _tier, int _damage, float _weight)
+    public static Weapon.Sword GenerateSword(Type.Tier _tier, int _damage, float _weight)
     {
         Ability[] abilitiesActive = new Ability[4];
         Ability[] abilitiesPassive = new Ability[2];

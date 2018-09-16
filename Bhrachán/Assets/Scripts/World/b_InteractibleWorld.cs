@@ -7,15 +7,13 @@ public class b_InteractibleWorld : MonoBehaviour
     bool inRange; //if in range and clicked on, counts as interaction
     GameObject player;
 
-	void Start ()
+    public virtual void Interact(GameObject interactor)
     {
-		
-	}
+        Weapon item = b_WeaponGenerator.GenerateCompletlyRandomWeapon();
+        interactor.GetComponent<b_PlayerWorld>().GetInventory().Add(item, 1);
+        Destroy(gameObject);
+    }
 
-	void Update ()
-    {
-		
-	}
 
     void OnMouseOver()
     {
@@ -24,11 +22,6 @@ public class b_InteractibleWorld : MonoBehaviour
             if (inRange && WorldHelper.CloseEnoughToInteract(player, gameObject))
                 Interact(player);
         }
-    }
-
-    public virtual void Interact(GameObject interactor)
-    {
-        Destroy(gameObject);
     }
 
     public virtual void SetInRange(bool val)

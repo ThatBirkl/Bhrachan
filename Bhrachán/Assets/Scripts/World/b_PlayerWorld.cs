@@ -4,10 +4,16 @@ using UnityEngine;
 using Facing = Meta.World.Movement.Facing;
 
 public class b_PlayerWorld : b_ActorWorldBase
-{	
-	protected override void Start ()
+{
+    b_Inventory inventory;
+    string id;
+    ArrayList interactibles;
+
+    protected override void Start ()
     {
         base.Start();
+        inventory = new b_Inventory(id);
+        interactibles = new ArrayList();
 	}
 	
 	
@@ -22,6 +28,18 @@ public class b_PlayerWorld : b_ActorWorldBase
 
     void HandleInput()
     {
+        if (Input.GetAxis("Interact") != 0)
+        {
+            foreach (GameObject o in interactibles)
+            {
+                if (WorldHelper.FacingInteractible(this, o))
+                {
+                    o.GetComponent<b_InteractibleWorld>().Interact(gameObject);
+                    break;
+                }
+            }
+        }
+
         if (collided)
             return;
 
@@ -55,19 +73,12 @@ public class b_PlayerWorld : b_ActorWorldBase
         }
     }
 
-    void OnTriggerStay2D(Collider2D col)
+    public b_Inventory GetInventory()
     {
-        if (col.CompareTag("Interactible"))
-        {
-            if (Input.GetAxis("Interact") != 0)
-            {
-                if (WorldHelper.FacingInteractible(this, col.gameObject))
-                {
-                    col.gameObject.GetComponent<b_InteractibleWorld>().Interact(gameObject);
-                }
-            }  
-        }
+        return inventory;
     }
+
+    //------------ COLLISION AND WORLD INTERACITON ----------------------------//
 
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -75,6 +86,7 @@ public class b_PlayerWorld : b_ActorWorldBase
         {
             col.GetComponent<b_InteractibleWorld>().SetInRange(true);
             col.GetComponent<b_InteractibleWorld>().SetPlayer(gameObject);
+            interactibles.Add(col.gameObject);
         }
     }
 
@@ -83,6 +95,7 @@ public class b_PlayerWorld : b_ActorWorldBase
         if (col.CompareTag("Interactible"))
         {
             col.GetComponent<b_InteractibleWorld>().SetInRange(false);
+            interactibles.Remove(col.gameObject);
         }
     }
 }
