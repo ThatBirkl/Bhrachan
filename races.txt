@@ -1,0 +1,10 @@
+Human
+Avian
+Orc
+<Amphibian>
+<Reptilian>
+Dwarf
+<Feline>
+<Canine>
+Elf
+Tauren
