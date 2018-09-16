@@ -57,7 +57,8 @@ PENALTY_SEC,		--amount of seconds the character gets pushed back
 DAMAGE_REDUCTION,	--mostly for parry abilities; reduced damage to caster
 MAX_NUM_TARGETS,	--the maximum number of targets for this ability
 PRIMARY_SKILL,		--keyword PRIMARY_SKILL
-SECONDARY_SKILL		--keyword SECUNDARY_SKILL
+SECONDARY_SKILL,	--keyword SECUNDARY_SKILL
+DISPLAY_CONDITION	--keyword ABILITY_DISPLAY_CONDITION
 ) values (
 NULL,
 (select kw.keyvalue
@@ -93,5 +94,10 @@ NULL,
 	from sys_keyword kt 
 	join sys_keyword kw on kw.keytype = kt.keyvalue
 	where kt.keytype = 0 and kt.keyname='SECONDARY_SKILL'
-	and kw.keyname='<secundary skill>')
+	and kw.keyname='<secundary skill>'),
+(select kw.keyvalue
+	from sys_keyword kt 
+	join sys_keyword kw on kw.keytype = kt.keyvalue
+	where kt.keytype = 0 and kt.keyname='ABILITY_DISPLAY_CONDITION'
+	and kw.keyname='<condition>')
 )
