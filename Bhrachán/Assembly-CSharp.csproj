@@ -53,12 +53,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Ability\Abilities.cs" />
      <Compile Include="Assets\Scripts\Ability\Ability.cs" />
+     <Compile Include="Assets\Scripts\Ability\ActiveAbility.cs" />
+     <Compile Include="Assets\Scripts\Ability\PassiveAbility.cs" />
+     <Compile Include="Assets\Scripts\Ability\ProtectionMarker.cs" />
      <Compile Include="Assets\Scripts\b_Character.cs" />
      <Compile Include="Assets\Scripts\b_CharacterGenerator.cs" />
      <Compile Include="Assets\Scripts\b_Inventory.cs" />
      <Compile Include="Assets\Scripts\b_WeaponGenerator.cs" />
-     <Compile Include="Assets\Scripts\BattleField.cs" />
      <Compile Include="Assets\Scripts\CharacterTrait.cs" />
      <Compile Include="Assets\Scripts\Definitions\Meta.cs" />
      <Compile Include="Assets\Scripts\Definitions\Ressources.cs" />

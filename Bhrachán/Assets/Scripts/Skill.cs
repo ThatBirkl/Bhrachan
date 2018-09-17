@@ -17,6 +17,7 @@ public abstract class Skill
 
     public void AddXp(float amount)
     {
+        //TODO save in db
         if (currentXp + amount >= maxXp)
         {
             currentXp = currentXp + amount - maxXp;
@@ -27,6 +28,11 @@ public abstract class Skill
         {
             currentXp += amount;
         }
+    }
+
+    public int GetLevel()
+    {
+        return currentLvl;
     }
 
     //-------------- SUB CLASSES -----------//

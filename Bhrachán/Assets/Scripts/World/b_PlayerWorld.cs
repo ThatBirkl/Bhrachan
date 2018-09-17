@@ -5,14 +5,12 @@ using Facing = Meta.World.Movement.Facing;
 
 public class b_PlayerWorld : b_ActorWorldBase
 {
-    b_Inventory inventory;
-    string id;
     ArrayList interactibles;
+    b_Character character;
 
     protected override void Start ()
     {
         base.Start();
-        inventory = new b_Inventory(id);
         interactibles = new ArrayList();
 	}
 	
@@ -75,7 +73,7 @@ public class b_PlayerWorld : b_ActorWorldBase
 
     public b_Inventory GetInventory()
     {
-        return inventory;
+        return character.GetInventory();
     }
 
     //------------ COLLISION AND WORLD INTERACITON ----------------------------//

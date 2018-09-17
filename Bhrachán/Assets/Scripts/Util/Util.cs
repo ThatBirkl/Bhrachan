@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using SkillName = TypeEnums.SkillName;
 using PrimarySkill = TypeEnums.PrimarySkill;
 using SecondarySkill = TypeEnums.SecondarySkill;
+using AbilityE = TypeEnums.Ability;
 
 public class Util
 {
@@ -116,5 +117,18 @@ public class Util
         }
 
         return 0;
+    }
+
+    public static Ability MakeAbility(AbilityE ability)
+    {
+        switch (ability)
+        {
+            case AbilityE.Parry:
+                return new Abilities.Parry();
+            case AbilityE.Strike:
+                return new Abilities.Strike();
+        }
+
+        return null;
     }
 }

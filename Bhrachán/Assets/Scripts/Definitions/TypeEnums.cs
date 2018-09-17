@@ -10,7 +10,19 @@
 
     public enum WeaponType
     {
-        //added values so it's in synv with db
+        //added values so it's in sync with db
+        sword = 1,
+        shield = 2,
+        staff = 3,
+        bow = 4,
+        mageStaff = 5,
+        axe = 6
+    }
+
+    public enum AbilityType
+    {
+        //added values so it's in sync with db
+        spell = 0,
         sword = 1,
         shield = 2,
         staff = 3,
@@ -105,10 +117,21 @@
         passive = 1
     }
 
-    public enum AbilityDisplayCondition
+    //public enum AbilityDisplayCondition
+    //{
+    //    always = 0,
+    //    noWeapon = 1,
+    //    noClothes = 2
+    //}
+
+    public enum AbilityWhenToCall
     {
-        always = 0,
-        noWeapon = 1,
-        noClothes = 2
+
+    }
+
+    public enum Ability
+    {
+        Parry = 0,
+        Strike = 1
     }
 }
