@@ -4,6 +4,14 @@ using SkillName = TypeEnums.SkillName;
 using PrimarySkill = TypeEnums.PrimarySkill;
 using SecondarySkill = TypeEnums.SecondarySkill;
 using AbilityE = TypeEnums.Ability;
+using ItemType = TypeEnums.ItemType;
+using WeaponType = TypeEnums.WeaponType;
+using AbilityType = TypeEnums.AbilityType;
+using ArmorType = TypeEnums.ArmorType;
+using TraitName = TypeEnums.TraitName;
+using Tier = TypeEnums.Tier;
+using AP = TypeEnums.ActivePassive;
+using AbilityWhenToCall = TypeEnums.AbilityWhenToCall;
 
 public class Util
 {
@@ -118,6 +126,190 @@ public class Util
 
         return 0;
     }
+
+    public static string EnumToString(ItemType e)
+    {
+        switch (e)
+        {
+            case TypeEnums.ItemType.weapon:
+                return "weapon";
+            case TypeEnums.ItemType.armor:
+                return "armor";
+            case TypeEnums.ItemType.consumable:
+                return "consumable";
+            case TypeEnums.ItemType.ressource:
+                return "ressource";
+        }
+
+        return "";
+    }
+
+    public static string EnumToString(WeaponType e)
+    {
+        switch (e)
+        {
+            case WeaponType.sword:
+                return "sword";
+            case WeaponType.shield:
+                return "shield";
+            case WeaponType.staff:
+                return "staff";
+            case WeaponType.bow:
+                return "bow";
+            case WeaponType.mageStaff:
+                return "mageStaff";
+            case WeaponType.axe:
+                return "axe";
+        }
+
+        return "";
+    }
+
+    public static string EnumToString(AbilityType e)
+    {
+        switch (e)
+        {
+            case AbilityType.spell:
+                return "spell";
+            case AbilityType.sword:
+                return "sword";
+            case AbilityType.shield:
+                return "shield";
+            case AbilityType.staff:
+                return "staff";
+            case AbilityType.bow:
+                return "bow";
+            case AbilityType.mageStaff:
+                return "mageStaff";
+            case AbilityType.axe:
+                return "axe";
+            case AbilityType.character:
+                return "character";
+        }
+
+        return "";
+    }
+
+    public static string EnumToString(ArmorType e)
+    {
+        switch (e)
+        {
+
+        }
+
+        return "";
+    }
+
+    public static string EnumToString(TraitName e)
+    {
+        switch (e)
+        {
+
+        }
+
+        return "";
+    }
+
+    public static string EnumToString(SkillName e)
+    {
+        switch (e)
+        {
+            case SkillName.intelligence:
+                return "intelligence";
+            case SkillName.agility:
+                return "agility";
+            case SkillName.strength:
+                return "strength";
+            case SkillName.magicProwess:
+                return "magicProwess";
+            case SkillName.people:
+                return "peopl";
+            case SkillName.medical:
+                return "medical";
+            case SkillName.flora:
+                return "flora";
+            case SkillName.fauna:
+                return "fauna";
+            case SkillName.legends:
+                return "legend";
+            case SkillName.bow:
+                return "bow";
+            case SkillName.sword:
+                return "sword";
+            case SkillName.axe:
+                return "axe";
+            case SkillName.shield:
+                return "shield";
+            case SkillName.staff:
+                return "staff";
+            case SkillName.manipulation:
+                return "manipulation";
+            case SkillName.restoration:
+                return "restoration";
+            case SkillName.materialization:
+                return "materialization";
+            case SkillName.ritualMagic:
+                return "ritualMagic";
+            case SkillName.instantaniousMagic:
+                return "instantaniousMagic";
+        }
+
+        return "";
+    }
+
+    public static string EnumToString(PrimarySkill e)
+    {
+        return EnumToString(Util.MapPrimarySkillToSkillname(e));
+    }
+
+    public static string EnumToString(SecondarySkill e)
+    {
+        return EnumToString(Util.MapSecondarySkillToSkillname(e));
+    }
+
+    public static string EnumToString(Tier e)
+    {
+        switch (e)
+        {
+            case Tier.common:
+                return "common";
+            case Tier.uncommon:
+                return "uncommon";
+            case Tier.rare:
+                return "rare";
+            case Tier.ultraRare:
+                return "ultraRare";
+            case Tier.epic:
+                return "epic";
+        }
+
+        return "";
+    }
+
+    public static string EnumToString(AP e)
+    {
+        switch (e)
+        {
+            case AP.active:
+                return "active";
+            case AP.passive:
+                return "passive";
+        }
+
+        return "";
+    }
+
+    public static string EnumToString(AbilityWhenToCall e)
+    {
+        switch (e)
+        {
+
+        }
+
+        return "";
+    }
+
+    //TODO implement the rest of these enum to string methods
 
     public static Ability MakeAbility(AbilityE ability)
     {

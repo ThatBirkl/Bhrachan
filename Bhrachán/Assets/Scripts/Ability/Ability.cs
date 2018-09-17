@@ -27,6 +27,11 @@ public abstract class Ability
         //different for every ability
     }
 
+    public override string ToString()
+    {
+        return name;
+    }
+
     public string Id
     {
         get { return abilityId; }

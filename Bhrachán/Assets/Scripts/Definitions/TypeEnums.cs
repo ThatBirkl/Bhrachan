@@ -28,7 +28,8 @@
         staff = 3,
         bow = 4,
         mageStaff = 5,
-        axe = 6
+        axe = 6,
+        character = 7
     }
 
     public enum ArmorType
