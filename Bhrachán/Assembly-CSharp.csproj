@@ -56,8 +56,8 @@
      <Compile Include="Assets\Scripts\Ability\Abilities.cs" />
      <Compile Include="Assets\Scripts\Ability\Ability.cs" />
      <Compile Include="Assets\Scripts\Ability\ActiveAbility.cs" />
+     <Compile Include="Assets\Scripts\Ability\BlockMarker.cs" />
      <Compile Include="Assets\Scripts\Ability\PassiveAbility.cs" />
-     <Compile Include="Assets\Scripts\Ability\ProtectionMarker.cs" />
      <Compile Include="Assets\Scripts\b_Character.cs" />
      <Compile Include="Assets\Scripts\b_CharacterGenerator.cs" />
      <Compile Include="Assets\Scripts\b_Inventory.cs" />
@@ -76,6 +76,8 @@
      <Compile Include="Assets\Scripts\World\b_CameraDungeon.cs" />
      <Compile Include="Assets\Scripts\World\b_InteractibleWorld.cs" />
      <Compile Include="Assets\Scripts\World\b_PlayerWorld.cs" />
+     <Compile Include="Assets\Scripts\World\b_WorldObject.cs" />
+     <Compile Include="Assets\Scripts\World\Chest.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/Megapoort/Desktop/Bhrachán/Bhrachán/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>

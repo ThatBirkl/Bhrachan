@@ -20,15 +20,24 @@ public class BlockMarker : MonoBehaviour
 
     private int CalculateDamage(int attackDamage, b_Character damageReceiver)
     {
+        //TODO
         //if chance for hit... and so on...
         //=>
         //calculate reduced damage through the skill and the damageReduction stat
         return 0;
     }
     
-    public virtual void ExecuteDamage(int attackDamage, b_Character damageReceiver)
+    public virtual void ExecuteDamage(int attackDamage, b_Character damageReceiver, b_Character attacker)
     {
-     //put all the damage calculation and who receives the damage in here
+        int damage = CalculateDamage(attackDamage, damageReceiver);
+        damageReceiver.AddHealth(-damage);
+    }
+
+    //------------ GETTERS -------------------
+
+    public int HitsLeft
+    {
+        get { return hits; }
     }
     
     //------------ SUBCLASSES ----------------
@@ -36,11 +45,39 @@ public class BlockMarker : MonoBehaviour
     public class ProtectionMarker : BlockMarker
     {
         private b_Character protector;
-        
-        public ProtectionMarker(b_Character _protector, Type.SkillName _skill, int _reduction, float _chance, int _hits)
+
+        public ProtectionMarker(b_Character _protector, Type.SkillName _skill, int _reduction, float _chance, int _hits) : base(_skill, _reduction, _chance, _hits)
         {
-              base.BlockMarker(_skill, _reduction, _chance, _hits);
-              protector = _protector;
+            protector = _protector; 
+        }
+
+        public override void ExecuteDamage(int attackDamage, b_Character damageReceiver, b_Character attacker)
+        {
+            int damage = CalculateDamage(attackDamage, protector);
+            protector.AddHealth(-damage);
+        }
+    }
+
+    public class ParryMarker : BlockMarker
+    {
+        Weapon weapon;
+        public ParryMarker(Weapon _weapon, Type.SkillName _skill, int _reduction, float _chance, int _hits) : base(_skill, _reduction, _chance, _hits)
+        {
+            weapon = _weapon;
+        }
+
+        public override void ExecuteDamage(int attackDamage, b_Character damageReceiver, b_Character attacker)
+        {
+            int damage = CalculateDamage(attackDamage, damageReceiver);
+            damageReceiver.AddHealth(-damage);
+            damage = CalculateParry(weapon, attacker);
+            attacker.AddHealth(-damage);
+        }
+
+        private int CalculateParry(Weapon _weapon, b_Character _attacker)
+        {
+            //TODO
+            return 0;
         }
     }
 }

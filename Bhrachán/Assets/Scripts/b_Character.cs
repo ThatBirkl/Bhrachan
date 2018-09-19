@@ -5,21 +5,24 @@ using Type = TypeEnums;
 
 public class b_Character : MonoBehaviour
 {
-    public struct HealthStr
+    public struct Stat
     {
         public int current;
         public int max;
     }
 
-    ArrayList protectionMarkers;
+    ArrayList blockMarkers;
     b_Inventory inventory;
 
 
     //stats
-    string id;
-    Dictionary<Type.PrimarySkill, Skill.PrimarySkill> primarySkills;
-    Dictionary<Type.SecondarySkill, Skill.SecondarySkill> secondarySkills;
-    HealthStr health;
+    protected string id;
+    protected Dictionary<Type.PrimarySkill, Skill.PrimarySkill> primarySkills;
+    protected Dictionary<Type.SecondarySkill, Skill.SecondarySkill> secondarySkills;
+    protected Dictionary<Type.TraitName, CharacterTrait> characterTraits;
+    protected Stat health;
+    protected Stat energy;
+    protected string name;
     //stats end
 
 
@@ -28,14 +31,32 @@ public class b_Character : MonoBehaviour
         ArrayList protectionMarkers = new ArrayList();
     }
 
-    public void AddProtectionMarker(ProtectionMarker marker)
+    public void AddBlockMarker(BlockMarker marker)
     {
-        protectionMarkers.Add(marker);
+        blockMarkers.Add(marker);
     }
 
     private void Die()
     {
 
+    }
+
+    public void ReceiveHit(b_Character attacker, int damage)
+    {
+        //TODO Add activation of passive abilities with call on hit
+        if (blockMarkers.Count > 0)
+        {
+            BlockMarker marker = ((BlockMarker)blockMarkers[0]);
+            marker.ExecuteDamage(damage, this, attacker);
+            if (marker.HitsLeft == 0)
+            {
+                blockMarkers.Remove(marker);
+            }
+        }
+        else
+        {
+            AddHealth(-damage);
+        }
     }
 
     public void AddHealth(int value)
@@ -49,6 +70,21 @@ public class b_Character : MonoBehaviour
         else if (health.current > health.max)
         {
             health.current = health.max;
+        }
+    }
+
+    public void AddEnergy(int value)
+    {
+        energy.current += value;
+
+        if (energy.current <= 0)
+        {
+            AddHealth(energy.current);
+            energy.current = 0;
+        }
+        else if (energy.current > energy.max)
+        {
+            energy.current = energy.max;
         }
     }
 

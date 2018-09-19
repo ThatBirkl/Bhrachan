@@ -35,7 +35,7 @@ namespace Abilities
         {
             base.Execute(caster, targets);
             float chance = 0.1f + (0.1f * caster.GetSkill(primarySkill));
-            caster.AddProtectionMarker(new ProtectionMarker(Util.MapSecondarySkillToSkillname(secondarySkill), damageReduction, chance, maxNumTargets));
+            caster.AddBlockMarker(new BlockMarker(Util.MapSecondarySkillToSkillname(secondarySkill), damageReduction, chance, maxNumTargets));
         }
     }
 

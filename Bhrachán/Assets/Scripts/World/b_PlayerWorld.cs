@@ -12,6 +12,7 @@ public class b_PlayerWorld : b_ActorWorldBase
     {
         base.Start();
         interactibles = new ArrayList();
+        player = gameObject;
 	}
 	
 	

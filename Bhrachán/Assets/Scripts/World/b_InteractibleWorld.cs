@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class b_InteractibleWorld : MonoBehaviour
+//TODO make this class abstract
+public class b_InteractibleWorld : b_WorldObject
 {
     bool inRange; //if in range and clicked on, counts as interaction
-    GameObject player;
+    //GameObject player;
 
     public virtual void Interact(GameObject interactor)
     {

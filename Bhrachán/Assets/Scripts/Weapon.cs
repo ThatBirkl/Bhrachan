@@ -7,6 +7,9 @@ public abstract class Weapon : Item.Equipment
 {
     protected Type.WeaponType weaponType;
     protected int damage;
+    protected bool named; //if this sword has a name "iron sword" or whatever doesn't count as a name
+    protected string name;
+    protected string description;
 
     protected Ability abilityActive1;
     protected Ability abilityActive2;

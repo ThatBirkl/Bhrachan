@@ -3,26 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using Facing = Meta.World.Movement.Facing;
 
-public class b_ActorWorldBase : MonoBehaviour
+public class b_ActorWorldBase : b_WorldObject
 {
     protected Vector3 targetPosition;
     protected float speed;
     Facing facing;
-    Collider2D col;
+    Collider2D collider;
     protected bool collided;
 
-	protected virtual void Start ()
+	protected override void Start ()
     {
+        base.Start();
         targetPosition = gameObject.transform.position;
-        col = gameObject.GetComponent<Collider2D>();
+        collider = gameObject.GetComponent<Collider2D>();
         //Maybe read this from some property from the character or the mob or whatever
         speed = Meta.World.Movement.SPEED;
         facing = Facing.up;
     }
 
-    protected virtual void Update()
+    protected override void Update()
     {
-        //Move();
+        base.Update();
     }
 
 	void FixedUpdate ()
