@@ -1,14 +1,14 @@
 # =============== #
 # Unity generated #
 # =============== #
-[Tt]emp/
-[Oo]bj/
-[Bb]uild
-/[Bb]uilds/
-/[Ll]ibrary/
+*/[Tt]emp/
+*/[Oo]bj/
+*/[Bb]uild
+*/[Bb]uilds/
+*/[Ll]ibrary/
 sysinfo.txt
 *.stackdump
-/Assets/AssetStoreTools*
+/Bhrachán/Assets/AssetStoreTools*
 *.apk
 *.unitypackage
  
@@ -16,7 +16,7 @@ sysinfo.txt
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
 [Ee]xported[Oo]bj/
-.vs/
+*.vs/
 /*.userprefs
 /*.csproj
 /*.pidb
