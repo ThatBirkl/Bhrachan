@@ -7,6 +7,7 @@ TextureImporter:
     21300004: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical-d817v10_2
     21300006: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical-d817v10_3
     21300008: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical-d817v10_4
+    21300010: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical-d817v10_5
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -47,7 +48,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 200
@@ -195,6 +196,26 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 590f1d847fa7c7b4cb0d685d50415582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical-d817v10_5
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 544
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48832ea4bc9cb9d46a11350bdc1cc6a2
       vertices: []
       indices: 
       edges: []
