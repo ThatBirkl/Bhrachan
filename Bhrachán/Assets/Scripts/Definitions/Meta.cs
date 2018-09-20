@@ -9,9 +9,10 @@ namespace Meta
         public class Movement
         {
             public static float TICK = 0.5f; //0.5 seconds
-            public static float SPEED = 1f;
-            public static float CAMERA_SPEED = 0.99f;
-            public static float CAMERA_DISTANCE = -5f;
+            public static float SPEED = 5f;
+            public static float CAMERA_SPEED = 10f;
+            public static float CAMERA_DISTANCE = -20f;
+            public static float CAMERA_ORTHIGRAPHIC_SIZE = 9f;
 
             public enum Facing
             {

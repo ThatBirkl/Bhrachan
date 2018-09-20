@@ -76,6 +76,7 @@
      <Compile Include="Assets\Scripts\World\b_CameraDungeon.cs" />
      <Compile Include="Assets\Scripts\World\b_InteractibleWorld.cs" />
      <Compile Include="Assets\Scripts\World\b_PlayerWorld.cs" />
+     <Compile Include="Assets\Scripts\World\b_Stairs.cs" />
      <Compile Include="Assets\Scripts\World\b_WorldObject.cs" />
      <Compile Include="Assets\Scripts\World\Chest.cs" />
  <Reference Include="UnityEditor.StandardEvents">

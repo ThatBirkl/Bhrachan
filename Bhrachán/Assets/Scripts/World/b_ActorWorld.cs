@@ -35,6 +35,7 @@ public class b_ActorWorldBase : b_WorldObject
     //-----------------------------------------------------------//
     protected void SetHorizontalMovement(float amount)
     {
+
         //Set vertical target back to current so diagonal movement is not possible
         float x = targetPosition.x;
         if (gameObject.transform.position.x + amount > gameObject.transform.position.x)
@@ -55,6 +56,7 @@ public class b_ActorWorldBase : b_WorldObject
 
     protected void SetVerticalMovement(float amount)
     {
+
         float y = targetPosition.y;
         if (gameObject.transform.position.y + amount > gameObject.transform.position.y)
         {
@@ -160,14 +162,14 @@ public class b_ActorWorldBase : b_WorldObject
             y = Mathf.Floor(gameObject.transform.position.y);
         }
 
-        if (gameObject.transform.position.z < targetPosition.z)
-        {
-            z = Mathf.Ceil(gameObject.transform.position.z);
-        }
-        else if(gameObject.transform.position.z > targetPosition.z)
-        {
-            z = Mathf.Floor(gameObject.transform.position.z);
-        }
+        //if (gameObject.transform.position.z < targetPosition.z)
+        //{
+        //    z = Mathf.Ceil(gameObject.transform.position.z);
+        //}
+        //else if(gameObject.transform.position.z > targetPosition.z)
+        //{
+        //    z = Mathf.Floor(gameObject.transform.position.z);
+        //}
 
         targetPosition = new Vector3(x, y, z);
     }
@@ -221,20 +223,15 @@ public class b_ActorWorldBase : b_WorldObject
         {
             StopMovingNegative();
             collided = true;
-            //Physics2D.IgnoreCollision(collision.collider, col);
         }
-
-
-
-        //TODO if collision with satirs get nextLvlZ
-        //set targetPosition.z to nextLvlZ
     }
 
-    void OnCollisionExit2D(Collision2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D col)
     {
-        //collided = false;
-        //TODO if collision with satirs get nextLvlZ
-        //set targetPosition.z to nextLvlZ
+        if (col.gameObject.tag.Equals("Stairs"))
+        {
+            targetPosition.z = col.gameObject.GetComponent<b_Stairs>().GetNextLevel();
+        }
     }
 
     public Facing GetFacing()

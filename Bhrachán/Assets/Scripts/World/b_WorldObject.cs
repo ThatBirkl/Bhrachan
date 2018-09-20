@@ -8,8 +8,8 @@ public class b_WorldObject : MonoBehaviour
     protected GameObject player;
 
 
-    private bool _visible_;
-    private bool _col_;
+    protected bool _visible_;
+    protected bool _col_;
 
 	protected virtual void Start ()
     {
@@ -59,7 +59,8 @@ public class b_WorldObject : MonoBehaviour
     {
         get
         {
-            return (player.transform.position.z > transform.position.z);
+            //since up is in the negative direction this has to be smaller meaning if z is smaller its higher up
+            return (player.transform.position.z < transform.position.z);
         }
     }
 
@@ -89,16 +90,28 @@ public class b_WorldObject : MonoBehaviour
         if (!_col_)
         {
             _col_ = true;
-            gameObject.GetComponent<Collider2D>().enabled = true;
+            //gameObject.GetComponent<Collider2D>().enabled = true;
+            Collider2D[] cols = gameObject.GetComponents<Collider2D>();
+
+            foreach (Collider2D x in cols)
+            {
+                x.enabled = true;
+            }
         }
     }
 
     private void DeactivateCollider()
     {
-        if (!_col_)
+        if (_col_)
         {
             _col_ = false;
-            gameObject.GetComponent<Collider2D>().enabled = false;
+            //gameObject.GetComponent<Collider2D>().enabled = false;
+            Collider2D[] cols = gameObject.GetComponents<Collider2D>();
+
+            foreach (Collider2D x in cols)
+            {
+                x.enabled = false;
+            }
         }
     }
 

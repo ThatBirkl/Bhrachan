@@ -25,6 +25,11 @@ public class b_Character : MonoBehaviour
     protected string name;
     //stats end
 
+    public b_Character()
+    {
+        inventory = new b_Inventory("");
+    }
+
 
     void Start()
     {

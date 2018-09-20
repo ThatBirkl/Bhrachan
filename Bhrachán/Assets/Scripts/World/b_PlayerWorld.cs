@@ -13,6 +13,7 @@ public class b_PlayerWorld : b_ActorWorldBase
         base.Start();
         interactibles = new ArrayList();
         player = gameObject;
+        character = new b_Character();
 	}
 	
 	
@@ -79,8 +80,9 @@ public class b_PlayerWorld : b_ActorWorldBase
 
     //------------ COLLISION AND WORLD INTERACITON ----------------------------//
 
-    void OnTriggerEnter2D(Collider2D col)
+    protected override void OnTriggerEnter2D(Collider2D col)
     {
+        base.OnTriggerEnter2D(col);
         if (col.CompareTag("Interactible"))
         {
             col.GetComponent<b_InteractibleWorld>().SetInRange(true);

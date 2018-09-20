@@ -8,6 +8,11 @@ public class b_CameraDungeon : MonoBehaviour
     [SerializeField]
     b_PlayerWorld player;
 
+    void Start()
+    {
+        GetComponent<Camera>().orthographicSize = Meta.World.Movement.CAMERA_ORTHIGRAPHIC_SIZE;
+    }
+
 	void Update ()
     {
         Vector3 target = player.gameObject.transform.position;
