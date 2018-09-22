@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Type = TypeEnums;
 
-public class b_Character : MonoBehaviour
+public class b_Character //: MonoBehaviour
 {
     public struct Stat
     {
@@ -41,9 +41,9 @@ public class b_Character : MonoBehaviour
         blockMarkers.Add(marker);
     }
 
-    private void Die()
+    public void Die()
     {
-
+        Debug.Log("is dead");
     }
 
     public void ReceiveHit(b_Character attacker, int damage)
@@ -93,6 +93,10 @@ public class b_Character : MonoBehaviour
         }
     }
 
+    public bool RemoveRation(int amount)
+    {
+        return inventory.RemoveConsumable(Ressources.Consumables.ration, amount);
+    }
 
     //----------------------- GETTERS || SETTERS -------------------------------//
     public int GetSkill(Type.PrimarySkill skill)

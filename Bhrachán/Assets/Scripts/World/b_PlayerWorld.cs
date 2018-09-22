@@ -7,6 +7,7 @@ public class b_PlayerWorld : b_ActorWorldBase
 {
     ArrayList interactibles;
     b_Character character;
+    b_WorldTickManager worldTickManager;
 
     protected override void Start ()
     {
@@ -14,7 +15,15 @@ public class b_PlayerWorld : b_ActorWorldBase
         interactibles = new ArrayList();
         player = gameObject;
         character = new b_Character();
-	}
+
+        character.GetInventory().Add(Util.MakeRation());
+        character.GetInventory().Add(Util.MakeRation());
+        character.GetInventory().Add(Util.MakeRation());
+        character.GetInventory().Add(Util.MakeRation());
+        character.GetInventory().Add(Util.MakeRation());
+        worldTickManager = GetComponent<b_WorldTickManager>();
+        worldTickManager.Begin(character);
+    }
 	
 	
 	protected override void Update ()

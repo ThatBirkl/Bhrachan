@@ -18,6 +18,10 @@ public abstract class Weapon : Item.Equipment
     protected Ability abilityPassive1;
     protected Ability abilityPassive2;
 
+    public Weapon(float _weight, int _value) : base(_weight, _value)
+    {
+
+    }
 
     /*
      * @return The active abilities in sorted order
@@ -49,16 +53,16 @@ public abstract class Weapon : Item.Equipment
 
     public class Sword : Weapon
     {
-        public Sword()
+        public Sword(float _weight, int _value) : base(_weight, _value)
         {
             weaponType = Type.WeaponType.sword;
             itemType = Type.ItemType.weapon;
             tier = Type.Tier.common;
             damage = 0;
-            weight = 0f; 
+            weight = 0f;
         }
 
-        public Sword(Type.Tier _tier, int _damage, float _weight, Ability[] activeAbilities, Ability[] passiveAbilities)
+        public Sword(Type.Tier _tier, int _damage, Ability[] activeAbilities, Ability[] passiveAbilities, float _weight, int _value) : base(_weight, _value)
         {
             weaponType = Type.WeaponType.sword;
             itemType = Type.ItemType.weapon;
@@ -76,7 +80,7 @@ public abstract class Weapon : Item.Equipment
 
     public class Axe : Weapon
     {
-        public Axe()
+        public Axe(float _weight, int _value) : base(_weight, _value)
         {
             weaponType = Type.WeaponType.axe;
             itemType = Type.ItemType.weapon;
@@ -85,7 +89,7 @@ public abstract class Weapon : Item.Equipment
             weight = 0f;
         }
 
-        public Axe(Type.Tier _tier, int _damage, float _weight, Ability[] activeAbilities, Ability[] passiveAbilities)
+        public Axe(Type.Tier _tier, int _damage, Ability[] activeAbilities, Ability[] passiveAbilities, float _weight, int _value) : base(_weight, _value)
         {
             weaponType = Type.WeaponType.axe;
             itemType = Type.ItemType.weapon;
@@ -103,7 +107,7 @@ public abstract class Weapon : Item.Equipment
 
     public class Staff : Weapon
     {
-        public Staff()
+        public Staff(float _weight, int _value) : base(_weight, _value)
         {
             weaponType = Type.WeaponType.staff;
             itemType = Type.ItemType.weapon;
@@ -112,7 +116,7 @@ public abstract class Weapon : Item.Equipment
             weight = 0f;
         }
 
-        public Staff(Type.Tier _tier, int _damage, float _weight, Ability[] activeAbilities, Ability[] passiveAbilities)
+        public Staff(Type.Tier _tier, int _damage, Ability[] activeAbilities, Ability[] passiveAbilities, float _weight, int _value) : base(_weight, _value)
         {
             weaponType = Type.WeaponType.staff;
             itemType = Type.ItemType.weapon;
@@ -130,7 +134,7 @@ public abstract class Weapon : Item.Equipment
 
     public class MageStaff : Weapon
     {
-        public MageStaff()
+        public MageStaff(float _weight, int _value) : base(_weight, _value)
         {
             weaponType = Type.WeaponType.mageStaff;
             itemType = Type.ItemType.weapon;
@@ -139,7 +143,7 @@ public abstract class Weapon : Item.Equipment
             weight = 0f;
         }
 
-        public MageStaff(Type.Tier _tier, int _damage, float _weight, Ability[] activeAbilities, Ability[] passiveAbilities)
+        public MageStaff(Type.Tier _tier, int _damage, Ability[] activeAbilities, Ability[] passiveAbilities, float _weight, int _value) : base(_weight, _value)
         {
             weaponType = Type.WeaponType.mageStaff;
             itemType = Type.ItemType.weapon;
@@ -157,7 +161,7 @@ public abstract class Weapon : Item.Equipment
 
     public class Shield : Weapon
     {
-        public Shield()
+        public Shield(float _weight, int _value) : base(_weight, _value)
         {
             weaponType = Type.WeaponType.shield;
             itemType = Type.ItemType.weapon;
@@ -166,7 +170,7 @@ public abstract class Weapon : Item.Equipment
             weight = 0f;
         }
 
-        public Shield(Type.Tier _tier, int _damage, float _weight, Ability[] activeAbilities, Ability[] passiveAbilities)
+        public Shield(Type.Tier _tier, int _damage, Ability[] activeAbilities, Ability[] passiveAbilities, float _weight, int _value) : base(_weight, _value)
         {
             weaponType = Type.WeaponType.shield;
             itemType = Type.ItemType.weapon;
@@ -184,7 +188,7 @@ public abstract class Weapon : Item.Equipment
 
     public class Bow : Weapon
     {
-        public Bow()
+        public Bow(float _weight, int _value) : base(_weight, _value)
         {
             weaponType = Type.WeaponType.bow;
             itemType = Type.ItemType.weapon;
@@ -193,7 +197,7 @@ public abstract class Weapon : Item.Equipment
             weight = 0f;
         }
 
-        public Bow(Type.Tier _tier, int _damage, float _weight, Ability[] activeAbilities, Ability[] passiveAbilities)
+        public Bow(Type.Tier _tier, int _damage, Ability[] activeAbilities, Ability[] passiveAbilities, float _weight, int _value) : base(_weight, _value)
         {
             weaponType = Type.WeaponType.bow;
             itemType = Type.ItemType.weapon;

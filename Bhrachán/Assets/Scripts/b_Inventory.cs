@@ -36,6 +36,7 @@ public class b_Inventory
     void Load()
     {
         inventory = new Dictionary<Item, int>();
+        capacity = 20;
 
         //All itemtypes have to be in the same db table for this to work;
         //a lot of ressource columns will be null for weapons and vice versa
@@ -123,5 +124,40 @@ public class b_Inventory
     public bool Add(Item item)
     {
         return Add(item, 1);
+    }
+
+    /*
+     * Remove a specified amount of a specified consumable from the inventory
+     */
+    public bool RemoveConsumable(Ressources.Consumables type, int amount)
+    {
+        foreach (var entry in inventory)
+        {
+            try
+            {
+                Item.Consumable ic = (Item.Consumable)entry.Key;
+                if (ic.GetName() == type)
+                {
+                    if (entry.Value - amount == 0)
+                    {
+                        inventory.Remove(ic);
+                        return true;
+                    }
+                    else if (entry.Value - amount < 0)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        inventory[ic] = entry.Value - amount;
+                        Debug.Log(inventory[ic]);
+                        return true;
+                    }
+                }
+            }
+            catch (System.InvalidCastException e) { }
+        }
+
+        return false;
     }
 }

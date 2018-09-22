@@ -323,4 +323,9 @@ public class Util
 
         return null;
     }
+
+    public static Item.Consumable MakeRation()
+    {
+        return new Item.Consumable(Ressources.Consumables.ration, 1, 1);
+    }
 }

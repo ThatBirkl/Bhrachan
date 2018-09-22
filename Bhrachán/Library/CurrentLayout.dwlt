@@ -111,7 +111,7 @@ MonoBehaviour:
   m_MinSize: {x: 913, y: 442}
   m_MaxSize: {x: 22008, y: 10021}
   vertical: 0
-  controlID: 3217
+  controlID: 5829
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 442}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 3218
+  controlID: 5830
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -372,9 +372,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1.2758626, y: 3.2600095, z: 5.0039062}
+    m_Target: {x: 0.90919113, y: 4.2986345, z: 4.9589844}
     speed: 2
-    m_Value: {x: 1.2758626, y: 3.2600095, z: 5.0039062}
+    m_Value: {x: 0.90919113, y: 4.2986345, z: 4.9589844}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -406,9 +406,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 4.8717666
+    m_Target: 9.391706
     speed: 2
-    m_Value: 4.8717666
+    m_Value: 9.391706
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -447,8 +447,8 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 522d0000
-    m_LastClickedID: 11602
+    m_SelectedIDs: 3a2d0000
+    m_LastClickedID: 11578
     m_ExpandedIDs: e6fbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -510,20 +510,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Sprites
+    - Assets/Scripts/World
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Sprites
+  - Assets/Scripts/World
   m_LastFoldersGridSize: -1
   m_LastProjectPath: "C:\\Users\\Megapoort\\Desktop\\Bhrach\xE1n\\Bhrach\xE1n"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 5c2c0000
-    m_LastClickedID: 11356
-    m_ExpandedIDs: 000000001c2a000000ca9a3b
+    m_SelectedIDs: 9a2a0000
+    m_LastClickedID: 10906
+    m_ExpandedIDs: 000000001e2a0000302c000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -551,7 +551,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000001c2a000000ca9a3b
+    m_ExpandedIDs: 000000001e2a0000302c000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

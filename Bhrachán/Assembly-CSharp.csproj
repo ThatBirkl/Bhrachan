@@ -78,6 +78,7 @@
      <Compile Include="Assets\Scripts\World\b_PlayerWorld.cs" />
      <Compile Include="Assets\Scripts\World\b_Stairs.cs" />
      <Compile Include="Assets\Scripts\World\b_WorldObject.cs" />
+     <Compile Include="Assets\Scripts\World\b_WorldTickManager.cs" />
      <Compile Include="Assets\Scripts\World\Chest.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/Megapoort/Desktop/Bhrachán/Bhrachán/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

@@ -77,6 +77,6 @@ public class b_WeaponGenerator : MonoBehaviour
 
         }
 
-        return new Weapon.Sword(_tier, _damage, _weight, abilitiesActive, abilitiesPassive);
+        return new Weapon.Sword(_tier, _damage, abilitiesActive, abilitiesPassive, _weight, 10);
     }
 }

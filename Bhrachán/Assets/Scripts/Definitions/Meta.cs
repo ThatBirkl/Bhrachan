@@ -8,7 +8,6 @@ namespace Meta
     {
         public class Movement
         {
-            public static float TICK = 0.5f; //0.5 seconds
             public static float SPEED = 5f;
             public static float CAMERA_SPEED = 10f;
             public static float CAMERA_DISTANCE = -20f;
@@ -21,6 +20,11 @@ namespace Meta
                 left,
                 right
             }
+        }
+
+        public class Automation
+        {
+            public static float TICK = 60f;
         }
     };
 
