@@ -72,7 +72,8 @@
      <Compile Include="Assets\Scripts\Util\Util.cs" />
      <Compile Include="Assets\Scripts\Util\WorldHelper.cs" />
      <Compile Include="Assets\Scripts\Weapon.cs" />
-     <Compile Include="Assets\Scripts\World\b_ActorWorld.cs" />
+     <Compile Include="Assets\Scripts\World\b_ActorCombat.cs" />
+     <Compile Include="Assets\Scripts\World\b_ActorWorldBase.cs" />
      <Compile Include="Assets\Scripts\World\b_CameraDungeon.cs" />
      <Compile Include="Assets\Scripts\World\b_InteractibleWorld.cs" />
      <Compile Include="Assets\Scripts\World\b_PlayerWorld.cs" />
@@ -80,6 +81,7 @@
      <Compile Include="Assets\Scripts\World\b_WorldObject.cs" />
      <Compile Include="Assets\Scripts\World\b_WorldTickManager.cs" />
      <Compile Include="Assets\Scripts\World\Chest.cs" />
+     <Compile Include="Assets\Scripts\World\CombatManager.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/Megapoort/Desktop/Bhrachán/Bhrachán/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
