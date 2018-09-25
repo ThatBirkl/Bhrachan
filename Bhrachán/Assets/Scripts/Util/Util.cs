@@ -328,4 +328,33 @@ public class Util
     {
         return new Item.Consumable(Ressources.Consumables.ration, 1, 1);
     }
+
+    public static string Translate(string _text, TypeEnums.Language _language)
+    {
+        switch (_language)
+        {
+            case TypeEnums.Language.Ancient:
+                return TranslateToAncient(_text);
+            case TypeEnums.Language.Elven:
+                return TranslateToElven(_text);
+            case TypeEnums.Language.Feline:
+                return TranslateToFeline(_text);
+        }
+        return _text;
+    }
+
+    private static string TranslateToAncient(string _text)
+    {
+        return "";
+    }
+
+    private static string TranslateToElven(string _text)
+    {
+        return "";
+    }
+
+    private static string TranslateToFeline(string _text)
+    {
+        return "";
+    }
 }

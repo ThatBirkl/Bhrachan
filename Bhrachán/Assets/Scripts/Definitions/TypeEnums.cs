@@ -135,4 +135,12 @@
         Parry = 0,
         Strike = 1
     }
+
+    public enum Language
+    {
+        Common = 0,
+        Ancient = 1,
+        Elven = 2,
+        Feline = 3
+    }
 }

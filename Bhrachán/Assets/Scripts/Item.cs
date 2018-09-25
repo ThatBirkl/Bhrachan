@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Type = TypeEnums;
 
-public abstract class Item
+public abstract class Item : ScriptableObject
 {
     protected float weight;
     protected int value;
