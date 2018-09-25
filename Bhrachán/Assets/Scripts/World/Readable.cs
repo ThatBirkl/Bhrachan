@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Readable : b_InteractibleWorld
 {
-    private string content;
+    protected string content;
+    protected string title;
+    protected bool multiplePages;
 
-    public override void Interact(GameObject interactor)
+    public override bool Interact(GameObject interactor)
     {
-        DisplayText();
+        if(base.Interact(interactor))
+            DisplayText();
+
+        return true;
     }
 
     protected virtual void DisplayText()
     {
-
+        if (!multiplePages)
+            Camera.main.GetComponent<b_CameraDungeon>().UI.DisplaySimpleText(title, content);
+        else
+            Camera.main.GetComponent<b_CameraDungeon>().UI.DisplayMultiplePageText(title, content);
     }
 }

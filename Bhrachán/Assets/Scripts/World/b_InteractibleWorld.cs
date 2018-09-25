@@ -6,13 +6,23 @@ using UnityEngine;
 public class b_InteractibleWorld : b_WorldObject
 {
     bool inRange; //if in range and clicked on, counts as interaction
-    //GameObject player;
+    bool active;
+    float reactivateSeconds;
 
-    public virtual void Interact(GameObject interactor)
+    protected override void Start()
     {
-        Weapon item = b_WeaponGenerator.GenerateCompletlyRandomWeapon();
-        interactor.GetComponent<b_PlayerWorld>().GetInventory().Add(item, 1);
-        Destroy(gameObject);
+        base.Start();
+        active = true;
+    }
+
+    public virtual bool Interact(GameObject interactor)
+    {
+        print("base interact");
+        if (!active)
+            return false;
+
+        active = false;
+        return true;
     }
 
 
@@ -30,8 +40,14 @@ public class b_InteractibleWorld : b_WorldObject
         inRange = val;
     }
 
-    public virtual void SetPlayer(GameObject _player)
+    //public virtual void SetPlayer(GameObject _player)
+    //{
+    //    player = _player;
+    //}
+
+    protected IEnumerator Reactivate()
     {
-        player = _player;
+        yield return new WaitForSeconds(reactivateSeconds);
+        active = true;
     }
 }

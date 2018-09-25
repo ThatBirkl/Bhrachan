@@ -69,14 +69,15 @@
      <Compile Include="Assets\Scripts\Definitions\TypeEnums.cs" />
      <Compile Include="Assets\Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\Skill.cs" />
-     <Compile Include="Assets\Scripts\UI\TEXT_TEST.cs" />
+     <Compile Include="Assets\Scripts\UI\b_Camera.cs" />
+     <Compile Include="Assets\Scripts\UI\b_CameraDungeon.cs" />
+     <Compile Include="Assets\Scripts\UI\b_UI.cs" />
      <Compile Include="Assets\Scripts\Util\DB.cs" />
      <Compile Include="Assets\Scripts\Util\Util.cs" />
      <Compile Include="Assets\Scripts\Util\WorldHelper.cs" />
      <Compile Include="Assets\Scripts\Weapon.cs" />
      <Compile Include="Assets\Scripts\World\b_ActorCombat.cs" />
      <Compile Include="Assets\Scripts\World\b_ActorWorldBase.cs" />
-     <Compile Include="Assets\Scripts\World\b_CameraDungeon.cs" />
      <Compile Include="Assets\Scripts\World\b_InteractibleWorld.cs" />
      <Compile Include="Assets\Scripts\World\b_PlayerWorld.cs" />
      <Compile Include="Assets\Scripts\World\b_Stairs.cs" />

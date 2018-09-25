@@ -43,6 +43,7 @@ public class b_PlayerWorld : b_ActorWorldBase
             {
                 if (WorldHelper.FacingInteractible(this, o))
                 {
+                    print("Handle input");
                     o.GetComponent<b_InteractibleWorld>().Interact(gameObject);
                     break;
                 }
@@ -95,7 +96,7 @@ public class b_PlayerWorld : b_ActorWorldBase
         if (col.CompareTag("Interactible"))
         {
             col.GetComponent<b_InteractibleWorld>().SetInRange(true);
-            col.GetComponent<b_InteractibleWorld>().SetPlayer(gameObject);
+            //col.GetComponent<b_InteractibleWorld>().SetPlayer(gameObject);
             interactibles.Add(col.gameObject);
         }
     }
