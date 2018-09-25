@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using SkillName = TypeEnums.SkillName;
 using PrimarySkill = TypeEnums.PrimarySkill;
 using SecondarySkill = TypeEnums.SecondarySkill;
@@ -331,30 +332,54 @@ public class Util
 
     public static string Translate(string _text, TypeEnums.Language _language)
     {
+        Dictionary<string, string> language;
+
+        _text = _text.ToLower();
+
         switch (_language)
         {
             case TypeEnums.Language.Ancient:
-                return TranslateToAncient(_text);
+                language = Language.Ancient;
+                break;
             case TypeEnums.Language.Elven:
-                return TranslateToElven(_text);
+                language = Language.Elven;
+                break;
             case TypeEnums.Language.Feline:
-                return TranslateToFeline(_text);
+                language = Language.Feline;
+                break;
+            default:
+                language = Language.Ancient;
+                break;
         }
+
+        foreach (KeyValuePair<string, string> e in language)
+        {
+            _text = _text.Replace(e.Key, e.Value);
+        }
+
         return _text;
     }
 
-    private static string TranslateToAncient(string _text)
+    public static Font GetFont(TypeEnums.Language _language)
     {
-        return "";
-    }
+        Font f = new Font();
 
-    private static string TranslateToElven(string _text)
-    {
-        return "";
-    }
+        switch (_language)
+        {
+            case TypeEnums.Language.Ancient:
+                f = Language.AncientFont;
+                break;
+            case TypeEnums.Language.Elven:
+                
+                break;
+            case TypeEnums.Language.Feline:
+                f = Language.FelineFont;
+                break;
+            default:
+                f = Language.AncientFont;
+                break;
+        }
 
-    private static string TranslateToFeline(string _text)
-    {
-        return "";
+        return f;
     }
 }
