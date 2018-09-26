@@ -10,7 +10,7 @@ public class b_UI : MonoBehaviour
 
         Instantiate(p);
 
-        p.transform.SetParent(transform);
+        p.transform.SetParent(transform, false);
     }
 
     public void DisplayMultiplePageText(string _title, string _text)
