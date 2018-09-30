@@ -17,7 +17,6 @@ public class b_InteractibleWorld : b_WorldObject
 
     public virtual bool Interact(GameObject interactor)
     {
-        print("base interact");
         if (!active)
             return false;
 

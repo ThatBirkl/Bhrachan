@@ -43,7 +43,6 @@ public class b_PlayerWorld : b_ActorWorldBase
             {
                 if (WorldHelper.FacingInteractible(this, o))
                 {
-                    print("Handle input");
                     o.GetComponent<b_InteractibleWorld>().Interact(gameObject);
                     break;
                 }

@@ -71,6 +71,7 @@
      <Compile Include="Assets\Scripts\Skill.cs" />
      <Compile Include="Assets\Scripts\UI\b_Camera.cs" />
      <Compile Include="Assets\Scripts\UI\b_CameraDungeon.cs" />
+     <Compile Include="Assets\Scripts\UI\b_Text.cs" />
      <Compile Include="Assets\Scripts\UI\b_UI.cs" />
      <Compile Include="Assets\Scripts\Util\DB.cs" />
      <Compile Include="Assets\Scripts\Util\Util.cs" />

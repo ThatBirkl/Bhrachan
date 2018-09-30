@@ -1,19 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UI = UnityEngine.UI;
 
 public class b_UI : MonoBehaviour
 {
-    public void DisplaySimpleText(string _title, string _text)
+    public void DisplaySimpleText(string _title, string _text, Font _font)
     {
-        GameObject p = Resources.Load<GameObject>("Prefabs/p_SimpleText");
+        GameObject p = Instantiate(Resources.Load<GameObject>("Prefabs/p_SimpleText"));
 
-        Instantiate(p);
+        //title
+        UI.Text t = p.transform.GetChild(1).GetComponent<UI.Text>();
+        t.text = _title;
+        t.font = _font;
 
+        //content
+        t = p.transform.GetChild(2).GetComponent<UI.Text>();
+        t.text = _text;
+        t.font = _font;
+
+        //done last so it's only displayed once everything is set
         p.transform.SetParent(transform, false);
     }
 
-    public void DisplayMultiplePageText(string _title, string _text)
+    public void DisplayMultiplePageText(string _title, string _text, Font _font)
     {
         gameObject.transform.GetChild(0).GetComponent<UnityEngine.UI.Text>().font =
             Util.GetFont(TypeEnums.Language.Feline);

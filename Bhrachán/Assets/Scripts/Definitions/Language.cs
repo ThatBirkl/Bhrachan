@@ -32,6 +32,7 @@ public class Language
             a.Add("t", "d");
             a.Add("k", "c");
             a.Add("z", "s");
+            a.Add("y", "i");
 
             //translation
             a.Add("a", "ཀ");
