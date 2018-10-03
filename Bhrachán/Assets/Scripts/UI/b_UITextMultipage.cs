@@ -18,7 +18,7 @@ public class b_UITextMultipage : b_UIText
         SwitchPage();
     }
 
-    public void AddText(string _text)
+    public void AddPage(string _text)
     {
         if (text == null)
         {
@@ -59,5 +59,10 @@ public class b_UITextMultipage : b_UIText
                 displayPointer -= 2;
             }
         }
+
+        //left page
+        transform.GetChild(0).transform.GetChild(1).GetComponent<UnityEngine.UI.Text>().text = (string)text[displayPointer];
+        //right page
+        transform.GetChild(1).transform.GetChild(1).GetComponent<UnityEngine.UI.Text>().text = (string)text[displayPointer + 1];
     }
 }

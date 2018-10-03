@@ -382,4 +382,19 @@ public class Util
 
         return f;
     }
+
+    public static string LoadText(string path)
+    {
+        return System.IO.File.ReadAllText(@path);
+    }
+
+    public static ArrayList PageText(string _text)
+    {
+        int pager = 10000;
+        ArrayList list = new ArrayList();
+
+        //TODO split text at last " " before pager and put pages in list
+
+        return list;
+    }
 }

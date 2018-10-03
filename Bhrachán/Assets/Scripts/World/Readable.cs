@@ -6,7 +6,7 @@ public class Readable : b_InteractibleWorld
 {
     protected string content;
     protected string title;
-    protected bool multiplePages;
+    protected bool multiPage;
     protected Font font;
 
     protected override void Start()
@@ -25,7 +25,7 @@ public class Readable : b_InteractibleWorld
 
     protected virtual void DisplayText()
     {
-        if (!multiplePages)
+        if (!multiPage)
             Camera.main.GetComponent<b_CameraDungeon>().UI.DisplaySimpleText(title, content, font);
         else
             Camera.main.GetComponent<b_CameraDungeon>().UI.DisplayMultiplePageText(title, content, font);
@@ -33,8 +33,12 @@ public class Readable : b_InteractibleWorld
 
     protected virtual void Load()
     {
-        content = "This is a text to try something";
+        //TODO make this into something proper
+
+        content = Util.LoadText(Texts.TEST_MULTIPAGE);
         title = "Test text";
+        multiPage = true;
+
 
         content = Util.Translate(content, TypeEnums.Language.Ancient);
         title = Util.Translate(title, TypeEnums.Language.Ancient);

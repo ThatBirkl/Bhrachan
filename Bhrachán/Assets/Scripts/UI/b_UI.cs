@@ -25,9 +25,11 @@ public class b_UI : MonoBehaviour
 
     public void DisplayMultiplePageText(string _title, string _text, Font _font)
     {
-        gameObject.transform.GetChild(0).GetComponent<UnityEngine.UI.Text>().font =
-            Util.GetFont(TypeEnums.Language.Feline);
+        GameObject p = Instantiate(Resources.Load<GameObject>("Prefabs/p_MultipageText"));
 
-        gameObject.transform.GetChild(0).GetComponent<UnityEngine.UI.Text>().text = "TEST";
+        UI.Text t = p.transform.GetChild(0).transform.GetChild(1).GetComponent<UI.Text>();
+
+        //done last so it's only displayed once everything is set
+        p.transform.SetParent(transform, false);
     }
 }
