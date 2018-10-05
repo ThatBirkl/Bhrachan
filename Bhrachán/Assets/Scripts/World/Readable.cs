@@ -35,9 +35,9 @@ public class Readable : b_InteractibleWorld
     {
         //TODO make this into something proper
 
-        content = Util.LoadText(Texts.TEST_MULTIPAGE);
+        content = Util.LoadText(Texts.TEST_MULTIPAGE.fileName);
         title = "Test text";
-        multiPage = true;
+        multiPage = Texts.TEST_MULTIPAGE.multipaged;
 
 
         content = Util.Translate(content, TypeEnums.Language.Ancient);
