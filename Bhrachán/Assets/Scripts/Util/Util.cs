@@ -388,13 +388,32 @@ public class Util
         return System.IO.File.ReadAllText(@path);
     }
 
-    public static ArrayList PageText(string _text)
+    public static ArrayList PageText(string _text, int _charCount)
     {
-        int pager = 10000;
         ArrayList list = new ArrayList();
-
+        
         //TODO split text at last " " before pager and put pages in list
+        string tempTxt = _text;
+        while(tempTxt.length > _charCount)
+        {
 
+            int spacePointer = 0;
+            for(spacePointer = _charCount; i > 0; i--)
+            {
+                if(_text[i] == " ")
+                {
+                    break;
+                }
+            }
+
+            string[] tempTxtArr = tempTxt.split(spacePointer);
+            list.Add(tempTxtArr[0]);
+            tempTxt = tempTxtArr[1];
+
+        }
+        
+        list.Add(tempTxt)
+        
         return list;
     }
 }
