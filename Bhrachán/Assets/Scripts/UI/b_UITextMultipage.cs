@@ -21,26 +21,40 @@ public class b_UITextMultipage : b_UIText
     public void AddPages(ArrayList _pages)
     {
         text = _pages;
-        if(text.length % 2 != 0)
+        if(text.Count % 2 != 0)
             text.Add("");
     }
 
     private void SwitchPage()
     {
         bool forward = false;
+        bool gotInput = false;
+
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            gotInput = true;
+            forward = true;
+        }
+        else if (Input.GetAxis("Horizontal") < 0)
+        {
+            gotInput = true;
+        }
 
         //check input
+        if (!gotInput)
+            return;
+
 
         if (forward)
         {
-            if (text.Count - 1 != displayPointer + 2)
+            if (text.Count - 1 > displayPointer + 2)
             {
                 displayPointer += 2;
             }
         }
         else
         {
-            if (0 != displayPointer - 2)
+            if (0 < displayPointer - 2)
             {
                 displayPointer -= 2;
             }

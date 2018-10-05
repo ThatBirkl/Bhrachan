@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text.RegularExpressions;
 using SkillName = TypeEnums.SkillName;
 using PrimarySkill = TypeEnums.PrimarySkill;
 using SecondarySkill = TypeEnums.SecondarySkill;
@@ -385,35 +386,32 @@ public class Util
 
     public static string LoadText(string path)
     {
-        return System.IO.File.ReadAllText(@path);
+        return System.IO.File.ReadAllText(path);
     }
 
     public static ArrayList PageText(string _text, int _charCount)
     {
         ArrayList list = new ArrayList();
-        
-        //TODO split text at last " " before pager and put pages in list
-        string tempTxt = _text;
-        while(tempTxt.length > _charCount)
-        {
 
+        string tempTxt = _text;
+        while(tempTxt.Length > _charCount)
+        {
             int spacePointer = 0;
-            for(spacePointer = _charCount; i > 0; i--)
+            for(spacePointer = _charCount; spacePointer > 0; spacePointer--)
             {
-                if(_text[i] == " ")
+                if (char.IsWhiteSpace(_text[spacePointer]))
                 {
                     break;
                 }
             }
+            string tempTxtArr = tempTxt.Substring(0, spacePointer);
 
-            string[] tempTxtArr = tempTxt.split(spacePointer);
-            list.Add(tempTxtArr[0]);
-            tempTxt = tempTxtArr[1];
-
+            list.Add(tempTxt.Substring(0, spacePointer));
+            tempTxt = tempTxt.Substring(spacePointer);
         }
-        
-        list.Add(tempTxt)
-        
+
+        list.Add(tempTxt);
+
         return list;
     }
 }

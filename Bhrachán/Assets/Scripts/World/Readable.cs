@@ -34,14 +34,13 @@ public class Readable : b_InteractibleWorld
     protected virtual void Load()
     {
         //TODO make this into something proper
-
         content = Util.LoadText(Texts.TEST_MULTIPAGE.fileName);
         title = Texts.TEST_MULTIPAGE.title;
         multiPage = Texts.TEST_MULTIPAGE.multipaged;
 
 
-        content = Util.Translate(content, TypeEnums.Language.Ancient);
-        title = Util.Translate(title, TypeEnums.Language.Ancient);
-        font = Language.AncientFont;
+        //content = Util.Translate(content, TypeEnums.Language.Ancient);
+        //title = Util.Translate(title, TypeEnums.Language.Ancient);
+        //font = Language.AncientFont;
     }
 }

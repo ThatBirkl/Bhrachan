@@ -49,7 +49,7 @@ namespace Meta
     {
         public class Texts
         {
-            public static int CHAR_COUNT = 10000;
+            public static int CHAR_COUNT = 1000;
         }
     }
 }

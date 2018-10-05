@@ -27,7 +27,7 @@ public class b_UI : MonoBehaviour
     {
         GameObject p = Instantiate(Resources.Load<GameObject>("Prefabs/p_MultipageText"));
 
-        ArrayList pages = Util.PageString(_text, Meta.Texts.CHAR_COUNT);
+        ArrayList pages = Util.PageText(_text, Meta.MISC.Texts.CHAR_COUNT);
         
         p.GetComponent<b_UITextMultipage>().AddPages(pages);
         
