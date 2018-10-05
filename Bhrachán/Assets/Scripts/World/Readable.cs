@@ -36,7 +36,7 @@ public class Readable : b_InteractibleWorld
         //TODO make this into something proper
 
         content = Util.LoadText(Texts.TEST_MULTIPAGE.fileName);
-        title = "Test text";
+        title = Texts.TEST_MULTIPAGE.title;
         multiPage = Texts.TEST_MULTIPAGE.multipaged;
 
 
