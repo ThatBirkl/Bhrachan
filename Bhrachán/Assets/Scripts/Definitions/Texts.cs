@@ -6,6 +6,7 @@ public class Texts
     //DEFINITIONS
     public struct textURL
     {
+        public string title,
         public string fileName,
         public bool multipaged
     }
@@ -16,5 +17,5 @@ public class Texts
     //URLS
     
     //public static string TEST_MULTIPAGE = path + "text_multipage.txt";
-    public static textURL TEXT_MULTIPAGE = { path + "text_multipage.txt", true }
+    public static textURL TEXT_MULTIPAGE = { "Test text", path + "text_multipage.txt", true }
 }
