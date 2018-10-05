@@ -27,7 +27,11 @@ public class b_UI : MonoBehaviour
     {
         GameObject p = Instantiate(Resources.Load<GameObject>("Prefabs/p_MultipageText"));
 
-        UI.Text t = p.transform.GetChild(0).transform.GetChild(1).GetComponent<UI.Text>();
+        ArrayList pages = Util.PageString(_text, Meta.Texts.CHAR_COUNT);
+
+        // Setting the pages will be handled in the class itself
+        // Simply hand the pages to the class 
+        //UI.Text t = p.transform.GetChild(0).transform.GetChild(1).GetComponent<UI.Text>();
 
         //done last so it's only displayed once everything is set
         p.transform.SetParent(transform, false);
