@@ -3,7 +3,18 @@ using System.Collections.Generic;
 
 public class Texts
 {
+    //DEFINITIONS
+    public struct textURL
+    {
+        public string fileName,
+        public bool multipaged
+    }
+    
     private static string path = "../../Assets/Resources/Texts/";
 
-    public static string TEST_MULTIPAGE = path + "text_multipage.txt";
+    
+    //URLS
+    
+    //public static string TEST_MULTIPAGE = path + "text_multipage.txt";
+    public static textURL TEXT_MULTIPAGE = { path + "text_multipage.txt", true }
 }
