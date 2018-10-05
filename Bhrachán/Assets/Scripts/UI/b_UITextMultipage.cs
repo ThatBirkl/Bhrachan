@@ -18,25 +18,11 @@ public class b_UITextMultipage : b_UIText
         SwitchPage();
     }
 
-    public void AddPage(string _text)
+    public void AddPages(ArrayList _pages)
     {
-        if (text == null)
-        {
-            text.Add(_text);
+        text = _pages;
+        if(text.length % 2 != 0)
             text.Add("");
-        }
-        else
-        {
-            if (text[text.Count - 1].Equals(""))
-            {
-                text[text.Count - 1] = _text;
-            }
-            else
-            {
-                text.Add(_text);
-                text.Add("");
-            }
-        }
     }
 
     private void SwitchPage()
