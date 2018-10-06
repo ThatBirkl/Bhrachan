@@ -59,4 +59,19 @@ public class b_ActorCombat : b_WorldObject
     {
         get { return secondsToWait; }
     }
+
+    public int X
+    {
+        get { return Mathf.RoundToInt(gameObject.transform.position.x); }
+    }
+
+    public int Y
+    {
+        get { return Mathf.RoundToInt(gameObject.transform.position.y); }
+    }
+
+    public int Z
+    {
+        get { return Mathf.RoundToInt(gameObject.transform.position.z); }
+    }
 }

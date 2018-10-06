@@ -86,6 +86,7 @@
      <Compile Include="Assets\Scripts\World\b_Stairs.cs" />
      <Compile Include="Assets\Scripts\World\b_WorldObject.cs" />
      <Compile Include="Assets\Scripts\World\b_WorldTickManager.cs" />
+     <Compile Include="Assets\Scripts\World\BattleField.cs" />
      <Compile Include="Assets\Scripts\World\Chest.cs" />
      <Compile Include="Assets\Scripts\World\CombatManager.cs" />
      <Compile Include="Assets\Scripts\World\Readable.cs" />

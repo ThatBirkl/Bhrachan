@@ -5,12 +5,16 @@ using UnityEngine;
 public class CombatManager : MonoBehaviour
 {
     static List<b_ActorCombat> actors;
+    static BattleField battlefield;
+    Sprite square;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
         actors = new List<b_ActorCombat>();
-	}
+        battlefield = new BattleField(actors.ToArray(), this);
+        square = Resources.Load<Sprite>("Sprites/square_1x1");
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -62,5 +66,10 @@ public class CombatManager : MonoBehaviour
     public static void EndCombat()
     {
         actors = null;
+    }
+
+    public void SetSquare(int _x, int _y)
+    {
+        Sprite s = Instantiate(square, new Vector3(_x, _y, 0), Quaternion.Euler(0, 0, 0));
     }
 }
