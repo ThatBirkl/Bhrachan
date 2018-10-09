@@ -40,4 +40,8 @@ sysinfo.txt
 *.unitypackage
 
 
+#Custom inserted
+*.meta
+*.log
+
 # End of https://www.gitignore.io/api/unity
