@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class b_WorldObject : MonoBehaviour
 {
-    [SerializeField]
+    //[SerializeField]
     protected GameObject player;
 
 
@@ -13,6 +13,7 @@ public class b_WorldObject : MonoBehaviour
 
 	protected virtual void Start ()
     {
+        player = Camera.main.GetComponent<b_CameraDungeon>().Player.gameObject;
         _col_ = true;
         DeactivateCollider();
         gameObject.GetComponent<SpriteRenderer>().color = new Color(

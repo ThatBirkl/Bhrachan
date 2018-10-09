@@ -1,10 +1,8 @@
-Human
-Avian
+??Human??
+Avian (bird + reptilian)
 Orc
-<Amphibian>
-<Reptilian>
+Selkies (amphibian)
 Dwarf
-<Feline>
-<Canine>
+Feline
+Canine
 Elf
-Tauren

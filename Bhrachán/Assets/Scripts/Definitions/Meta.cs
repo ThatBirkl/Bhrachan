@@ -44,4 +44,12 @@ namespace Meta
             public static int EPIC_MAX = 75;
         }
     };
+    
+    namespace MISC
+    {
+        public class Texts
+        {
+            public static int CHAR_COUNT = 1000;
+        }
+    }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Movement = Meta.World.Movement;
 
-public class b_CameraDungeon : MonoBehaviour
+public class b_CameraDungeon : b_Camera
 {
     [SerializeField]
     b_PlayerWorld player;
@@ -24,4 +24,9 @@ public class b_CameraDungeon : MonoBehaviour
         gameObject.transform.position = Vector3.MoveTowards(transform.position,
             target, step);
 	}
+
+    public b_PlayerWorld Player
+    {
+        get { return player; }
+    }
 }

@@ -95,7 +95,7 @@ public class b_PlayerWorld : b_ActorWorldBase
         if (col.CompareTag("Interactible"))
         {
             col.GetComponent<b_InteractibleWorld>().SetInRange(true);
-            col.GetComponent<b_InteractibleWorld>().SetPlayer(gameObject);
+            //col.GetComponent<b_InteractibleWorld>().SetPlayer(gameObject);
             interactibles.Add(col.gameObject);
         }
     }

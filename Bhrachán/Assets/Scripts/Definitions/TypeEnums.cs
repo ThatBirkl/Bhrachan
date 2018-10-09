@@ -34,11 +34,27 @@
 
     public enum ArmorType
     {
-
+        head = 0,
+        upperBody = 1
     }
 
     public enum TraitName
     {
+        courage = 0, //doubles as daring
+        openness = 1,
+        extroversion = 2,
+        agreeable = 3,
+        calmness = 4, //negative as aggressiveness
+        compassionate = 5, //doubles for generousity
+        thoughtful = 6,
+        dramatic = 7, //negative dramatic as stoic??
+        enthusiastic = 8, //this plus agreeable as openminded?
+        honesty = 9,
+        decisive = 10,
+        logical = 11,
+        loyalty = 12,
+
+        //humble = dramatic + honesty
 
     }
 
@@ -118,12 +134,12 @@
         passive = 1
     }
 
-    //public enum AbilityDisplayCondition
-    //{
-    //    always = 0,
-    //    noWeapon = 1,
-    //    noClothes = 2
-    //}
+    public enum AbilityDisplayCondition
+    {
+        always = 0,
+        noWeapon = 1,
+        noClothes = 2
+    }
 
     public enum AbilityWhenToCall
     {

@@ -4,15 +4,43 @@ using UnityEngine;
 
 public class Readable : b_InteractibleWorld
 {
-    private string content;
+    protected string content;
+    protected string title;
+    protected bool multiPage;
+    protected Font font;
 
-    public override void Interact(GameObject interactor)
+    protected override void Start()
     {
-        DisplayText();
+        base.Start();
+        Load();
+    }
+
+    public override bool Interact(GameObject interactor)
+    {
+        if(base.Interact(interactor))
+            DisplayText();
+
+        return true;
     }
 
     protected virtual void DisplayText()
     {
+        if (!multiPage)
+            Camera.main.GetComponent<b_CameraDungeon>().UI.DisplaySimpleText(title, content, font);
+        else
+            Camera.main.GetComponent<b_CameraDungeon>().UI.DisplayMultiplePageText(title, content, font);
+    }
 
+    protected virtual void Load()
+    {
+        //TODO make this into something proper
+        content = Util.LoadText(Texts.TEST_MULTIPAGE.fileName);
+        title = Texts.TEST_MULTIPAGE.title;
+        multiPage = Texts.TEST_MULTIPAGE.multipaged;
+
+
+        //content = Util.Translate(content, TypeEnums.Language.Ancient);
+        //title = Util.Translate(title, TypeEnums.Language.Ancient);
+        //font = Language.AncientFont;
     }
 }

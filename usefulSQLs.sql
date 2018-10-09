@@ -41,7 +41,7 @@ NULL,
 (select KEYVALUE from SYS_KEYWORD where KEYNAME = '<keytype name>')
 )
 
--- Insert Ability
+-- Insert Ability (DO NOT USE)
 insert into SYS_ABILITY(
 ABILITYID, 			--ID
 ACTIVE_PASSIVE,		--keyword ABILITY_A_P
