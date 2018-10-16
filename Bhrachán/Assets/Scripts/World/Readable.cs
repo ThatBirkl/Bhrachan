@@ -22,7 +22,7 @@ public class Readable : b_InteractibleWorld
 
         //Remove this again
         DungeonGenerator dg = new DungeonGenerator();
-        dg.GenerateDungeon(new Vector3(100, 100, 1));
+        dg.GenerateDungeon(new Vector3(100, 100, 1), new Biomes.Biome());
 
         return true;
     }

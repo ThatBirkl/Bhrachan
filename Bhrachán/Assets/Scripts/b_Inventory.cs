@@ -82,7 +82,7 @@ public class b_Inventory
                             return true;
                         }
                     }
-                    catch (System.InvalidCastException e){}
+                    catch (System.InvalidCastException e){ Debug.Log(e.ToString()); }
                 }  
             }
             else
