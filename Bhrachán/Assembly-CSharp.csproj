@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\Definitions\Ressources.cs" />
      <Compile Include="Assets\Scripts\Definitions\Texts.cs" />
      <Compile Include="Assets\Scripts\Definitions\TypeEnums.cs" />
+     <Compile Include="Assets\Scripts\DungonGenerator.cs" />
      <Compile Include="Assets\Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\Skill.cs" />
      <Compile Include="Assets\Scripts\UI\b_Camera.cs" />
