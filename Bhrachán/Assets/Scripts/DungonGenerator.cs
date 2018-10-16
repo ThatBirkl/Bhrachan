@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Drawing;
 
-public class DungonGenerator : MonoBehaviour
+public class DungeonGenerator// : MonoBehaviour
 {
-    private enum ObjectType
+    public enum ObjectType
     {
         nothing,
 
@@ -14,7 +14,7 @@ public class DungonGenerator : MonoBehaviour
         cliff
     }
 
-    private enum GroundType
+    public enum GroundType
     {
         water,
         snow,
@@ -23,15 +23,28 @@ public class DungonGenerator : MonoBehaviour
         stone
     }
 
-    Dictionary<GroundType, Vector3> groundColors;
+    public struct Map
+    {
+        public GroundType[][][] ground;
+        public ObjectType[][][] objects;
+        public Map(GroundType[][][] _ground, ObjectType[][][] _objects)
+        {
+            ground = _ground;
+            objects = _objects;
+        }
+    }
+
+    Dictionary<GroundType, System.Drawing.Color> groundColors;
 
     //[z][y][x]
     private bool[][][] canPlaceObject;
     private GroundType[][][] ground;
     private ObjectType[][][] objects;
 
-
     private Vector3 dimensions;
+
+    public DungeonGenerator()
+    { }
 
     private void Initiate(Vector3 _dimensions)
     {
@@ -47,7 +60,7 @@ public class DungonGenerator : MonoBehaviour
             ground[z] = new GroundType[Mathf.FloorToInt(dimensions.y)][];
             objects[z] = new ObjectType[Mathf.FloorToInt(dimensions.y)][];
 
-            for (int y = 0; z < dimensions.y; y++)
+            for (int y = 0; y < dimensions.y; y++)
             {
                 canPlaceObject[z][y] = new bool[Mathf.FloorToInt(dimensions.x)];
                 ground[z][y] = new GroundType[Mathf.FloorToInt(dimensions.x)];
@@ -61,13 +74,49 @@ public class DungonGenerator : MonoBehaviour
                 }
             }
         }
+        groundColors = new Dictionary<GroundType, System.Drawing.Color>();
+        groundColors.Add(GroundType.grass, System.Drawing.Color.Green);
+        //TODO add more ground types
+    }
 
-        groundColors.Add(GroundType.grass, new Vector3(1,1,1));
+    public Map GenerateDungeon(Vector3 _dimensions)
+    {
+        Initiate(_dimensions);
+        Map map = new Map(null, null);
+
+        //TODO generate a dungeon
+
+        map.ground = ground;
+        map.objects = objects;
+
+        //TODO remove this again
+        ExportBitmap();
+
+        return map;
     }
 
 
     public void ExportBitmap()
     {
-        Bitmap bmp = new Bitmap(100, 100);
+        Bitmap bmp;
+        string uuid = Util.UUID();
+        for (int z = 0; z < dimensions.z; z++)
+        {
+            bmp = new Bitmap(Mathf.CeilToInt(dimensions.x), Mathf.CeilToInt(dimensions.y));
+            for (int y = 0; y < dimensions.y; y++)
+            {
+                for (int x = 0; x < dimensions.x; x++)
+                {
+                    bmp.SetPixel(x, y, groundColors[ground[z][y][x]]);
+                }
+            }
+
+            if (!System.IO.Directory.Exists("C:/Bhrachan/temp/Dungeon"))
+            {
+                System.IO.Directory.CreateDirectory("C:/Bhrachan/temp/Dungeon");
+            }
+
+            bmp.Save("C:/Bhrachan/temp/Dungeon/Colormap_"+ uuid +"_"+ z + ".bmp");
+        }
     }
 }

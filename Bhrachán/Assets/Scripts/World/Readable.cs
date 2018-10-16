@@ -20,6 +20,10 @@ public class Readable : b_InteractibleWorld
         if(base.Interact(interactor))
             DisplayText();
 
+        //Remove this again
+        DungeonGenerator dg = new DungeonGenerator();
+        dg.GenerateDungeon(new Vector3(100, 100, 1));
+
         return true;
     }
 
@@ -38,7 +42,7 @@ public class Readable : b_InteractibleWorld
         title = Texts.TEST_MULTIPAGE.title;
         multiPage = Texts.TEST_MULTIPAGE.multipaged;
 
-
+        
         //content = Util.Translate(content, TypeEnums.Language.Ancient);
         //title = Util.Translate(title, TypeEnums.Language.Ancient);
         //font = Language.AncientFont;

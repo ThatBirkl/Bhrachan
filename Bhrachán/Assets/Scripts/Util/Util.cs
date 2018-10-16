@@ -414,4 +414,13 @@ public class Util
 
         return list;
     }
+
+    public static string UUID()
+    {
+        long dtl = System.DateTime.Now.ToBinary();
+        dtl += Random.Range(int.MinValue, int.MaxValue);
+        dtl = dtl ^ System.DateTime.Now.ToBinary();
+        dtl = System.Math.Abs(dtl);
+        return dtl.ToString();
+    }
 }
