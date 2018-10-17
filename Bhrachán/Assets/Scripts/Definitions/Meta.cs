@@ -52,4 +52,11 @@ namespace Meta
             public static int CHAR_COUNT = 1000;
         }
     }
+
+    public class DungeonGeneration
+    {
+        public static int RIVER_MARKERS_MIN = 0;
+        public static int RIVER_MARKERS_MAX = 10;
+        public static int RIVER_NOISE = 30;
+    }
 }

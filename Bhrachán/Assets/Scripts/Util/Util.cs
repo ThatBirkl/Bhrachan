@@ -423,4 +423,22 @@ public class Util
         dtl = System.Math.Abs(dtl);
         return dtl.ToString();
     }
+
+    /*
+    * Returns true if the the two points are within a 3x3x3 cube of each other
+    */
+    public static bool NextToEachOther(Vector3 a, Vector3 b)
+    {
+        if((a.x >= b.x - 1 && a.x <= b.x + 1) && 
+            (a.y >= b.y - 1 && a.y <= b.y + 1) &&
+            (a.z >= b.z - 1 && a.z <= b.z + 1))
+            return true;
+
+        return false;
+    }
+
+    public static bool NextToEachOther(Vector2 a, Vector2 b)
+    {
+        return NextToEachOther(new Vector3(a.x, a.y, 0), new Vector3(b.x, b.y, 0));
+    }
 }
