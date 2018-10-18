@@ -281,6 +281,15 @@ public class DungeonGenerator// : MonoBehaviour
 
                 riverMarkers = new List<Vector2>(riverMarkersTemp);
                 loopCounter++;
+                
+                //Only for debugging!
+                //Remove since it's horrible for the runtime!
+                for(int j = 0; j < riverMarkers.Count; j++)
+                {
+                    ground[_level][Mathf.FloorToInt(riverMarkers[j].y)][Mathf.FloorToInt(riverMarkers[j].x)] = GroundType.water;
+                }
+                
+                ExportBitmap(loopCounter);
             }
 
 
@@ -314,6 +323,30 @@ public class DungeonGenerator// : MonoBehaviour
             }
 
             bmp.Save("C:/Bhrachan/temp/Dungeon/Colormap_"+ uuid +"_"+ z + ".bmp");
+        }
+    }
+    
+    public void ExportBitmap(int _i)
+    {
+        Bitmap bmp;
+        //string uuid = Util.UUID();
+        for (int z = 0; z < dimensions.z; z++)
+        {
+            bmp = new Bitmap(Mathf.CeilToInt(dimensions.x), Mathf.CeilToInt(dimensions.y));
+            for (int y = 0; y < dimensions.y; y++)
+            {
+                for (int x = 0; x < dimensions.x; x++)
+                {
+                    bmp.SetPixel(x, y, groundColors[ground[z][y][x]]);
+                }
+            }
+
+            if (!System.IO.Directory.Exists("C:/Bhrachan/temp/Dungeon"))
+            {
+                System.IO.Directory.CreateDirectory("C:/Bhrachan/temp/Dungeon");
+            }
+
+            bmp.Save("C:/Bhrachan/temp/Dungeon/Colormap_"+ i +"_"+ z + ".bmp");
         }
     }
 }
