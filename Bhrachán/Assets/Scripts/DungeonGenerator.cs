@@ -205,10 +205,10 @@ public class DungeonGenerator// : MonoBehaviour
             int loopCounter = 1;
             //Maybe change the /2 to something smaller
             //2^stopper ~ 100 für map(100, 100)
-            int stopper = Mathf.Sqrt(Mathf.Pow(start.x - end.x, 2) + Mathf.Pow(start.y - end.y, 2)) / 20;//Mathf.FloorToInt(6 * 
-                //Mathf.Sqrt(Mathf.Sqrt(Mathf.Pow(Mathf.Abs(start.x - end.x), 2) + Mathf.Pow(Mathf.Abs(start.y - end.y), 2))) / 10 * 
-                //Mathf.Sqrt(Mathf.Sqrt(dimensions.x * dimensions.y)) / 10);
-
+            int stopper = Mathf.Sqrt(Mathf.Pow(start.x - end.x, 2) + Mathf.Pow(start.y - end.y, 2)) / 21; //(0,0)->(100,100) ~ 100 markers
+            //int stopper = (Mathf.Abs(start.x - end.x) + Mathf.Abs(start.y - end.y))/2 / 15; //(0,0)->(100,100) ~ 100 markers
+            //int stopper = Mathf.Max(Mathf.Abs(start.x - end.x), Mathf.Abs(start.y - end.y)) / 15; //(0,0)->(100,100) ~ 100 markers
+            
             while(!stop)
             {
                 //stop = true;
