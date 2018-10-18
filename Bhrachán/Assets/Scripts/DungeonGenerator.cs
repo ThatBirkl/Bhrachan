@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Drawing;
+using Meta;
 
 public class DungeonGenerator// : MonoBehaviour
 {
@@ -205,9 +206,16 @@ public class DungeonGenerator// : MonoBehaviour
             int loopCounter = 1;
             //Maybe change the /2 to something smaller
             //2^stopper ~ 100 für map(100, 100)
-            int stopper = Mathf.Sqrt(Mathf.Pow(start.x - end.x, 2) + Mathf.Pow(start.y - end.y, 2)) / 21; //(0,0)->(100,100) ~ 100 markers
-            //int stopper = (Mathf.Abs(start.x - end.x) + Mathf.Abs(start.y - end.y))/2 / 15; //(0,0)->(100,100) ~ 100 markers
-            //int stopper = Mathf.Max(Mathf.Abs(start.x - end.x), Mathf.Abs(start.y - end.y)) / 15; //(0,0)->(100,100) ~ 100 markers
+            int stopper = Mathf.FloorToInt(
+                            Mathf.Pow(
+                                Mathf.Log10(
+                                    Mathf.Sqrt(Mathf.Pow(start.x - end.x, 2) + 
+                                    Mathf.Pow(start.y - end.y, 2))
+                                )
+                            , 3)
+                        ); //(0,0)->(100,100) ~ 100 markers
+            //int stopper = Mathf.FloorToInt((Mathf.Abs(start.x - end.x) + Mathf.Abs(start.y - end.y))/2 / 15); //(0,0)->(100,100) ~ 100 markers
+            //-> WAAAAAY to slow for 300x300 int stopper = Mathf.FloorToInt(Mathf.Max(Mathf.Abs(start.x - end.x), Mathf.Abs(start.y - end.y)) / 15); //(0,0)->(100,100) ~ 100 markers
             
             while(!stop)
             {
@@ -215,7 +223,7 @@ public class DungeonGenerator// : MonoBehaviour
                 stop = false;
                 
 
-                for(int index = 0; index < riverMarkers.Count; index = index + 2)
+                for(int index = 0; index < riverMarkers.Count; index = index + 1)
                 {
                     Vector2 marker = Vector2.zero;
 
@@ -230,11 +238,13 @@ public class DungeonGenerator// : MonoBehaviour
 
                         //generating marker
                         marker.x = (riverMarkers[index].x + riverMarkers[index+1].x)/2;
-                        marker.x += Random.Range(-Meta.DungeonGeneration.RIVER_NOISE / Mathf.Pow(loopCounter,2), Meta.DungeonGeneration.RIVER_NOISE / Mathf.Pow(loopCounter,2));
+                        marker.x += Random.Range(-DungeonGeneration.RIVER_NOISE / Mathf.Pow(DungeonGeneration.RIVER_NOISE_REDUCTION,loopCounter)
+                        , DungeonGeneration.RIVER_NOISE / Mathf.Pow(DungeonGeneration.RIVER_NOISE_REDUCTION,loopCounter)) * stopper;
                         marker.x = Mathf.FloorToInt(marker.x);
 
                         marker.y = (riverMarkers[index].y + riverMarkers[index+1].y)/2;
-                        marker.y += Random.Range(-Meta.DungeonGeneration.RIVER_NOISE / Mathf.Pow(loopCounter,2), Meta.DungeonGeneration.RIVER_NOISE / Mathf.Pow(loopCounter,2));
+                        marker.y += Random.Range(-DungeonGeneration.RIVER_NOISE / Mathf.Pow(DungeonGeneration.RIVER_NOISE_REDUCTION,loopCounter)
+                        , DungeonGeneration.RIVER_NOISE / Mathf.Pow(DungeonGeneration.RIVER_NOISE_REDUCTION,loopCounter)) * stopper;
                         marker.y = Mathf.FloorToInt(marker.y);
 
                         marker.x = Mathf.Min(dimensions.x-1, marker.x);
@@ -256,11 +266,13 @@ public class DungeonGenerator// : MonoBehaviour
                         //}
                         //generating marker
                         marker.x = (riverMarkers[index-1].x + riverMarkers[index].x)/2;
-                        marker.x += Random.Range(-Meta.DungeonGeneration.RIVER_NOISE / Mathf.Pow(loopCounter,2), Meta.DungeonGeneration.RIVER_NOISE / Mathf.Pow(loopCounter,2));
+                        marker.x += Random.Range(-DungeonGeneration.RIVER_NOISE / Mathf.Pow(DungeonGeneration.RIVER_NOISE_REDUCTION,loopCounter)
+                        , DungeonGeneration.RIVER_NOISE / Mathf.Pow(DungeonGeneration.RIVER_NOISE_REDUCTION,loopCounter)) * stopper;
                         marker.x = Mathf.FloorToInt(marker.x);
 
                         marker.y = (riverMarkers[index-1].y + riverMarkers[index].y)/2;
-                        marker.y += Random.Range(-Meta.DungeonGeneration.RIVER_NOISE / Mathf.Pow(loopCounter,2), Meta.DungeonGeneration.RIVER_NOISE / Mathf.Pow(loopCounter,2));
+                        marker.y += Random.Range(-DungeonGeneration.RIVER_NOISE / Mathf.Pow(DungeonGeneration.RIVER_NOISE_REDUCTION,loopCounter)
+                        , DungeonGeneration.RIVER_NOISE / Mathf.Pow(DungeonGeneration.RIVER_NOISE_REDUCTION,loopCounter)) * stopper;
                         marker.y = Mathf.FloorToInt(marker.y);
 
                         marker.x = Mathf.Min(dimensions.x-1, marker.x);
@@ -286,12 +298,12 @@ public class DungeonGenerator// : MonoBehaviour
                 
                 //Only for debugging!
                 //Remove since it's horrible for the runtime!
-                for(int j = 0; j < riverMarkers.Count; j++)
+                /*for(int j = 0; j < riverMarkers.Count; j++)
                 {
                     ground[_level][Mathf.FloorToInt(riverMarkers[j].y)][Mathf.FloorToInt(riverMarkers[j].x)] = GroundType.water;
                 }
                 
-                ExportBitmap(loopCounter);
+                ExportBitmap(loopCounter);*/
             }
 
 
@@ -348,7 +360,7 @@ public class DungeonGenerator// : MonoBehaviour
                 System.IO.Directory.CreateDirectory("C:/Bhrachan/temp/Dungeon");
             }
 
-            bmp.Save("C:/Bhrachan/temp/Dungeon/Colormap_"+ i +"_"+ z + ".bmp");
+            bmp.Save("C:/Bhrachan/temp/Dungeon/Colormap_"+ _i +"_"+ z + ".bmp");
         }
     }
 }
