@@ -441,4 +441,38 @@ public class Util
     {
         return NextToEachOther(new Vector3(a.x, a.y, 0), new Vector3(b.x, b.y, 0));
     }
+
+    /*
+    * @return 0 if a is close; 1 if b is close; 2 if both have the same distance
+    */
+    public static int CloserTo(int _a, int _b, int _compare)
+    {
+        int distA = Mathf.Abs(_a - _compare);
+        int distB = Mathf.Abs(_b - _compare);
+
+        if(distA < distB)
+        {
+            return 0;
+        }
+        else if(distA > distB)
+        {
+            return 1;
+        }
+        else
+        {
+            return 2;
+        }
+    }
+
+    public static float Distance(Vector3 a, Vector3 b)
+    {
+        Vector3 dist = b - a;
+
+        return Mathf.Sqrt(Mathf.Pow(dist.x, 2) + Mathf.Pow(dist.y, 2) + Mathf.Pow(dist.z, 2));
+    }
+
+    public static float Distance(Vector2 a, Vector2 b)
+    {
+        return Distance(new Vector3(a.x, a.y, 0), new Vector3(b.x, b.y, 0));
+    }
 }

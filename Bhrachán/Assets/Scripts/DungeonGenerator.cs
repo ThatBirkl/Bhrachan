@@ -199,13 +199,11 @@ public class DungeonGenerator// : MonoBehaviour
             riverMarkers.Add(start);
             riverMarkers.Add(end);
 
-
             //Generating the outline of the river
             bool stop = false;
             List<Vector2> riverMarkersTemp = new List<Vector2>();
             int loopCounter = 1;
-            //Maybe change the /2 to something smaller
-            //2^stopper ~ 100 für map(100, 100)
+
             int stopper = Mathf.FloorToInt(
                             Mathf.Pow(
                                 Mathf.Log10(
@@ -213,66 +211,49 @@ public class DungeonGenerator// : MonoBehaviour
                                     Mathf.Pow(start.y - end.y, 2))
                                 )
                             , 3)
-                        ); //(0,0)->(100,100) ~ 100 markers
-            //int stopper = Mathf.FloorToInt((Mathf.Abs(start.x - end.x) + Mathf.Abs(start.y - end.y))/2 / 15); //(0,0)->(100,100) ~ 100 markers
-            //-> WAAAAAY to slow for 300x300 int stopper = Mathf.FloorToInt(Mathf.Max(Mathf.Abs(start.x - end.x), Mathf.Abs(start.y - end.y)) / 15); //(0,0)->(100,100) ~ 100 markers
-            
+                        ) * 2;
             while(!stop)
             {
-                //stop = true;
-                stop = false;
                 
+                riverMarkersTemp.Add(riverMarkers[0]);
 
-                for(int index = 0; index < riverMarkers.Count; index = index + 1)
+                for(int index = 1; index < riverMarkers.Count; index++)
                 {
+                    //0 2 3
+                    //3 5
                     Vector2 marker = Vector2.zero;
-
-                    if(index == 0/*riverMarkers.Count >= index + 2 */)
+                    float weightA = 0;
+                    float weightB = 0;
+                    
+                    if(riverMarkers[index-1] == riverMarkers[index])
+                    {}
+                    else if(Util.NextToEachOther(riverMarkers[index-1],riverMarkers[index]))
                     {
-                        //if(!Util.NextToEachOther(riverMarkers[index], riverMarkers[index+1]))
-                        //{
-                        //    stop = false;
-                        //}
-
                         riverMarkersTemp.Add(riverMarkers[index]);
-
-                        //generating marker
-                        marker.x = (riverMarkers[index].x + riverMarkers[index+1].x)/2;
-                        marker.x += Random.Range(-DungeonGeneration.RIVER_NOISE / Mathf.Pow(DungeonGeneration.RIVER_NOISE_REDUCTION,loopCounter)
-                        , DungeonGeneration.RIVER_NOISE / Mathf.Pow(DungeonGeneration.RIVER_NOISE_REDUCTION,loopCounter)) * stopper;
-                        marker.x = Mathf.FloorToInt(marker.x);
-
-                        marker.y = (riverMarkers[index].y + riverMarkers[index+1].y)/2;
-                        marker.y += Random.Range(-DungeonGeneration.RIVER_NOISE / Mathf.Pow(DungeonGeneration.RIVER_NOISE_REDUCTION,loopCounter)
-                        , DungeonGeneration.RIVER_NOISE / Mathf.Pow(DungeonGeneration.RIVER_NOISE_REDUCTION,loopCounter)) * stopper;
-                        marker.y = Mathf.FloorToInt(marker.y);
-
-                        marker.x = Mathf.Min(dimensions.x-1, marker.x);
-                        marker.x = Mathf.Max(0, marker.x);
-
-                        marker.y = Mathf.Min(dimensions.y-1, marker.y);
-                        marker.y = Mathf.Max(0, marker.y);
-
-                        riverMarkersTemp.Add(marker);
-
-                        riverMarkersTemp.Add(riverMarkers[index + 1]);
                     }
                     else
                     {
-
-                        //if(!Util.NextToEachOther(riverMarkers[index-1], riverMarkers[index]))
-                        //{
-                        //    stop = false;
-                        //}
                         //generating marker
-                        marker.x = (riverMarkers[index-1].x + riverMarkers[index].x)/2;
-                        marker.x += Random.Range(-DungeonGeneration.RIVER_NOISE / Mathf.Pow(DungeonGeneration.RIVER_NOISE_REDUCTION,loopCounter)
-                        , DungeonGeneration.RIVER_NOISE / Mathf.Pow(DungeonGeneration.RIVER_NOISE_REDUCTION,loopCounter)) * stopper;
-                        marker.x = Mathf.FloorToInt(marker.x);
 
-                        marker.y = (riverMarkers[index-1].y + riverMarkers[index].y)/2;
-                        marker.y += Random.Range(-DungeonGeneration.RIVER_NOISE / Mathf.Pow(DungeonGeneration.RIVER_NOISE_REDUCTION,loopCounter)
-                        , DungeonGeneration.RIVER_NOISE / Mathf.Pow(DungeonGeneration.RIVER_NOISE_REDUCTION,loopCounter)) * stopper;
+                        int closer = Util.CloserTo(index - 1, index, Mathf.FloorToInt(riverMarkers.Count/2));
+
+                        
+
+                        if(closer == 0){ weightA = 3; weightB = 1; }
+                        else if(closer == 1){ weightA = 1; weightB = 3; }
+                        else if(closer == 2){ weightA = 2f; weightB = 2f; }
+
+                        marker.x = (riverMarkers[index-1].x * weightA + riverMarkers[index].x * weightB)/(weightA + weightB);
+
+                        marker.y = (riverMarkers[index-1].y * weightA + riverMarkers[index].y * weightB)/(weightA + weightB);
+
+                        Vector2 dist = riverMarkers[index] - riverMarkers[index-1];
+                        dist = new Vector2(dist.y, - dist.x);
+                        dist.Normalize();
+                        dist *= (Random.Range(-DungeonGeneration.RIVER_NOISE, DungeonGeneration.RIVER_NOISE) 
+                        / Mathf.Pow(DungeonGeneration.RIVER_NOISE_REDUCTION,loopCounter));
+                        marker += dist;
+                        marker.x = Mathf.FloorToInt(marker.x);
                         marker.y = Mathf.FloorToInt(marker.y);
 
                         marker.x = Mathf.Min(dimensions.x-1, marker.x);
@@ -285,6 +266,7 @@ public class DungeonGenerator// : MonoBehaviour
 
                         riverMarkersTemp.Add(riverMarkers[index]);
                     }
+                    
                 }
 
                 if(loopCounter == stopper)
@@ -294,16 +276,9 @@ public class DungeonGenerator// : MonoBehaviour
                     
 
                 riverMarkers = new List<Vector2>(riverMarkersTemp);
+                riverMarkersTemp.Clear();
+                
                 loopCounter++;
-                
-                //Only for debugging!
-                //Remove since it's horrible for the runtime!
-                /*for(int j = 0; j < riverMarkers.Count; j++)
-                {
-                    ground[_level][Mathf.FloorToInt(riverMarkers[j].y)][Mathf.FloorToInt(riverMarkers[j].x)] = GroundType.water;
-                }
-                
-                ExportBitmap(loopCounter);*/
             }
 
 
@@ -311,6 +286,8 @@ public class DungeonGenerator// : MonoBehaviour
             {
                 ground[_level][Mathf.FloorToInt(riverMarkers[j].y)][Mathf.FloorToInt(riverMarkers[j].x)] = GroundType.water;
             }
+
+            ExportBitmap();
             
         }
     }
@@ -337,30 +314,6 @@ public class DungeonGenerator// : MonoBehaviour
             }
 
             bmp.Save("C:/Bhrachan/temp/Dungeon/Colormap_"+ uuid +"_"+ z + ".bmp");
-        }
-    }
-    
-    public void ExportBitmap(int _i)
-    {
-        Bitmap bmp;
-        //string uuid = Util.UUID();
-        for (int z = 0; z < dimensions.z; z++)
-        {
-            bmp = new Bitmap(Mathf.CeilToInt(dimensions.x), Mathf.CeilToInt(dimensions.y));
-            for (int y = 0; y < dimensions.y; y++)
-            {
-                for (int x = 0; x < dimensions.x; x++)
-                {
-                    bmp.SetPixel(x, y, groundColors[ground[z][y][x]]);
-                }
-            }
-
-            if (!System.IO.Directory.Exists("C:/Bhrachan/temp/Dungeon"))
-            {
-                System.IO.Directory.CreateDirectory("C:/Bhrachan/temp/Dungeon");
-            }
-
-            bmp.Save("C:/Bhrachan/temp/Dungeon/Colormap_"+ _i +"_"+ z + ".bmp");
         }
     }
 }

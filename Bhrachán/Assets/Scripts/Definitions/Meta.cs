@@ -55,9 +55,7 @@ namespace Meta
 
     public class DungeonGeneration
     {
-        public static int RIVER_MARKERS_MIN = 0;
-        public static int RIVER_MARKERS_MAX = 10;
-        public static int RIVER_NOISE = 75;
-        public static int RIVER_NOISE_REDUCTION = 75;
+        public static float RIVER_NOISE = 50;
+        public static float RIVER_NOISE_REDUCTION = 2.5f;
     }
 }
