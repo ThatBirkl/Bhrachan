@@ -391,9 +391,19 @@ public class DungeonGenerator// : MonoBehaviour
     {
         List<DirNum> ret = new List<DirNum>();
 
-        switch(_width)
+        /* switch(_width)
         {
             //insert more here
+            case 7:
+                ret.Add(new DirNum(Direction.left, 6));
+                ret.Add(new DirNum(Direction.down, 6));
+                ret.Add(new DirNum(Direction.right, 1));
+                goto case 4;
+            case 6:
+                ret.Add(new DirNum(Direction.right, 5));
+                ret.Add(new DirNum(Direction.up, 5));
+                ret.Add(new DirNum(Direction.left, 1));
+                goto case 3;
             case 5:
                 ret.Add(new DirNum(Direction.left, 4));
                 ret.Add(new DirNum(Direction.down, 4));
@@ -414,6 +424,22 @@ public class DungeonGenerator// : MonoBehaviour
                 ret.Add(new DirNum(Direction.up, 1));
                 ret.Add(new DirNum(Direction.left, 1));
                 break;
+        }*/
+
+        for(int i = _width; i > 1; i--)
+        {
+            if(i % 2 == 1)
+            {
+                ret.Add(new DirNum(Direction.left, i - 1));
+                ret.Add(new DirNum(Direction.down, i - 1));
+                ret.Add(new DirNum(Direction.right, 1));
+            }
+            else
+            {
+                ret.Add(new DirNum(Direction.right, i - 1));
+                ret.Add(new DirNum(Direction.up, i - 1));
+                ret.Add(new DirNum(Direction.left, 1));
+            }
         }
 
         return ret;
