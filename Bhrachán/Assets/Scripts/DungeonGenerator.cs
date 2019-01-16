@@ -26,8 +26,17 @@ public class DungeonGenerator// : MonoBehaviour
         water,
         snow,
         grass,
+        grass_dark,
         sand,
         stone
+    }
+
+    private enum Direction
+    {
+        up,
+        down,
+        left,
+        right
     }
 
     public struct Map
@@ -41,6 +50,18 @@ public class DungeonGenerator// : MonoBehaviour
         }
     }
 
+    private struct DirNum
+    {
+        public int num;
+        public Direction dir;
+
+        public DirNum(Direction _dir, int _num)
+        {
+            dir = _dir;
+            num = _num;
+        }
+    }
+
     Dictionary<GroundType, System.Drawing.Color> groundColors;
 
     //[z][y][x]
@@ -50,6 +71,8 @@ public class DungeonGenerator// : MonoBehaviour
 
     private Vector3 dimensions;
     private Biomes.Biome biome;
+
+    private int riverCount;
 
     public DungeonGenerator()
     { }
@@ -97,6 +120,7 @@ public class DungeonGenerator// : MonoBehaviour
         //TODO generate a dungeon
 
         GenerateRiver(0);
+        GenerateSea(0);
 
 
         map.ground = ground;
@@ -110,7 +134,7 @@ public class DungeonGenerator// : MonoBehaviour
 
     private void GenerateRiver(int _level)
     {
-        int riverCount = Random.Range(biome.riverCountMin, biome.riverCountMax);
+        riverCount = Random.Range(biome.riverCountMin, biome.riverCountMax);
 
         //int riverMarkerCount = Random.Range(Meta.DungeonGeneration.RIVER_MARKERS_MIN, Meta.DungeonGeneration.RIVER_MARKERS_MAX);
 
@@ -205,13 +229,13 @@ public class DungeonGenerator// : MonoBehaviour
             int loopCounter = 1;
 
             int stopper = Mathf.FloorToInt(
-                            Mathf.Pow(
-                                Mathf.Log10(
+                            //Mathf.Pow(
+                                //Mathf.Log10(
                                     Mathf.Sqrt(Mathf.Pow(start.x - end.x, 2) + 
                                     Mathf.Pow(start.y - end.y, 2))
-                                )
-                            , 3)
-                        ) * 2;
+                                //)
+                            //, 3)
+                        ) ;
             while(!stop)
             {
                 
@@ -235,13 +259,13 @@ public class DungeonGenerator// : MonoBehaviour
                     {
                         //generating marker
 
-                        int closer = Util.CloserTo(index - 1, index, Mathf.FloorToInt(riverMarkers.Count/2));
+                        int closer = Util.CloserTo(index - 1, index, Mathf.CeilToInt(riverMarkers.Count/2));
 
-                        
-
-                        if(closer == 0){ weightA = 3; weightB = 1; }
-                        else if(closer == 1){ weightA = 1; weightB = 3; }
-                        else if(closer == 2){ weightA = 2f; weightB = 2f; }
+                        //if(closer == 0){ weightA = 3; weightB = 1; }
+                        //else if(closer == 1){ weightA = 1; weightB = 3; }
+                        //else if(closer == 2){ weightA = 2f; weightB = 2f; }
+                        weightA = 1;
+                        weightB = 1;
 
                         marker.x = (riverMarkers[index-1].x * weightA + riverMarkers[index].x * weightB)/(weightA + weightB);
 
@@ -256,11 +280,11 @@ public class DungeonGenerator// : MonoBehaviour
                         marker.x = Mathf.FloorToInt(marker.x);
                         marker.y = Mathf.FloorToInt(marker.y);
 
-                        marker.x = Mathf.Min(dimensions.x-1, marker.x);
-                        marker.x = Mathf.Max(0, marker.x);
+                        //marker.x = Mathf.Min(dimensions.x-1, marker.x);
+                        //marker.x = Mathf.Max(0, marker.x);
 
-                        marker.y = Mathf.Min(dimensions.y-1, marker.y);
-                        marker.y = Mathf.Max(0, marker.y);
+                        //marker.y = Mathf.Min(dimensions.y-1, marker.y);
+                        //marker.y = Mathf.Max(0, marker.y);
 
                         riverMarkersTemp.Add(marker);
 
@@ -269,7 +293,7 @@ public class DungeonGenerator// : MonoBehaviour
                     
                 }
 
-                if(loopCounter == stopper)
+                if(loopCounter >= stopper)
                 {
                     stop = true;
                 }
@@ -281,15 +305,60 @@ public class DungeonGenerator// : MonoBehaviour
                 loopCounter++;
             }
 
+            List<DirNum> dirNum = RiverExpansionLookup(Random.Range(biome.riverWidthMin, biome.riverWidthMax));
+            Vector2 curPos;
+
+
+            //maybe floor the coordinates of the markers before this step
+            riverMarkersTemp.Clear();
+            foreach(Vector2 v in riverMarkers)
+            {
+                curPos = v;
+                foreach(DirNum d in dirNum)
+                {
+                    for(int c = 0; c < d.num; c++)
+                    {
+                        switch(d.dir)
+                        {
+                            case Direction.up:
+                                curPos.y++;
+                                break;
+                            case Direction.down:
+                                curPos.y--;
+                                break;
+                            case Direction.left:
+                                curPos.x--;
+                                break;
+                            case Direction.right:
+                                curPos.x++;
+                                break;
+                        }
+                        riverMarkersTemp.Add(new Vector2(curPos.x, curPos.y));
+                    }
+                }
+            }
+
+            riverMarkers.AddRange(riverMarkersTemp);
 
             for(int j = 0; j < riverMarkers.Count; j++)
             {
-                ground[_level][Mathf.FloorToInt(riverMarkers[j].y)][Mathf.FloorToInt(riverMarkers[j].x)] = GroundType.water;
+                if(Mathf.FloorToInt(riverMarkers[j].y) >= 0 && 
+                    Mathf.FloorToInt(riverMarkers[j].y) < dimensions.y && 
+                    Mathf.FloorToInt(riverMarkers[j].x) >= 0 &&
+                    Mathf.FloorToInt(riverMarkers[j].x) < dimensions.x)
+                {     
+                    ground[_level][Mathf.FloorToInt(riverMarkers[j].y)][Mathf.FloorToInt(riverMarkers[j].x)] = GroundType.water;
+                }
             }
 
-            ExportBitmap();
+            //ExportBitmap();
             
         }
+    }
+
+    private void GenerateSea(int _level)
+    {
+
     }
 
 
@@ -315,5 +384,38 @@ public class DungeonGenerator// : MonoBehaviour
 
             bmp.Save("C:/Bhrachan/temp/Dungeon/Colormap_"+ uuid +"_"+ z + ".bmp");
         }
+    }
+
+
+    private static List<DirNum> RiverExpansionLookup(int _width)
+    {
+        List<DirNum> ret = new List<DirNum>();
+
+        switch(_width)
+        {
+            //insert more here
+            case 5:
+                ret.Add(new DirNum(Direction.left, 4));
+                ret.Add(new DirNum(Direction.down, 4));
+                ret.Add(new DirNum(Direction.right, 1));
+                goto case 4;
+            case 4:
+                ret.Add(new DirNum(Direction.right, 3));
+                ret.Add(new DirNum(Direction.up, 3));
+                ret.Add(new DirNum(Direction.left, 1));
+                goto case 3;
+            case 3:
+                ret.Add(new DirNum(Direction.left, 2));
+                ret.Add(new DirNum(Direction.down, 2));
+                ret.Add(new DirNum(Direction.right, 1));
+                goto case 2;
+            case 2:
+                ret.Add(new DirNum(Direction.right, 1));
+                ret.Add(new DirNum(Direction.up, 1));
+                ret.Add(new DirNum(Direction.left, 1));
+                break;
+        }
+
+        return ret;
     }
 }
