@@ -27,16 +27,24 @@ public class Readable : b_InteractibleWorld
         dg.GenerateDungeon(new Vector3(100, 200, 1), Biomes.Grassland);
         dg.GenerateDungeon(new Vector3(200, 200, 1), Biomes.Grassland);
         dg.GenerateDungeon(new Vector3(300, 300, 1), Biomes.Grassland);
-        dg.GenerateDungeon(new Vector3(100, 100, 1), Biomes.Grassland);
-        dg.GenerateDungeon(new Vector3(200, 100, 1), Biomes.Grassland);
-        dg.GenerateDungeon(new Vector3(100, 200, 1), Biomes.Grassland);
-        dg.GenerateDungeon(new Vector3(200, 200, 1), Biomes.Grassland);
-        dg.GenerateDungeon(new Vector3(300, 300, 1), Biomes.Grassland);
-        dg.GenerateDungeon(new Vector3(100, 100, 1), Biomes.Grassland);
-        dg.GenerateDungeon(new Vector3(200, 100, 1), Biomes.Grassland);
-        dg.GenerateDungeon(new Vector3(100, 200, 1), Biomes.Grassland);
-        dg.GenerateDungeon(new Vector3(200, 200, 1), Biomes.Grassland);
-        dg.GenerateDungeon(new Vector3(300, 300, 1), Biomes.Grassland);
+
+        dg.GenerateDungeon(new Vector3(100, 100, 1), Biomes.Marsh);
+        dg.GenerateDungeon(new Vector3(200, 300, 1), Biomes.Marsh);
+        dg.GenerateDungeon(new Vector3(100, 200, 1), Biomes.Marsh);
+        dg.GenerateDungeon(new Vector3(200, 200, 1), Biomes.Marsh);
+        dg.GenerateDungeon(new Vector3(300, 300, 1), Biomes.Marsh);
+
+        dg.GenerateDungeon(new Vector3(100, 100, 1), Biomes.Sea);
+        dg.GenerateDungeon(new Vector3(200, 100, 1), Biomes.Sea);
+        dg.GenerateDungeon(new Vector3(100, 200, 1), Biomes.Sea);
+        dg.GenerateDungeon(new Vector3(200, 200, 1), Biomes.Sea);
+        dg.GenerateDungeon(new Vector3(300, 300, 1), Biomes.Sea);
+
+        dg.GenerateDungeon(new Vector3(100, 100, 1), Biomes.Desert);
+        dg.GenerateDungeon(new Vector3(200, 100, 1), Biomes.Desert);
+        dg.GenerateDungeon(new Vector3(100, 200, 1), Biomes.Desert);
+        dg.GenerateDungeon(new Vector3(200, 200, 1), Biomes.Desert);
+        dg.GenerateDungeon(new Vector3(300, 300, 1), Biomes.Desert);
 
 
         return true;

@@ -38,6 +38,8 @@ public class Biomes
         }
     }
 
-    public static Biome Grassland = new Biome( 1, 3, 2, 5, DungeonGenerator.GroundType.grass, 0f, 0f, 0f, 0, 2, 1, 4 );
-    public static Biome Marsh = new Biome( 2, 5, 3, 4, DungeonGenerator.GroundType.grass_dark, 0f, 0f, 0f, 4, 5, 1, 2 );
+    public static Biome Grassland = new Biome( 0, 1, 2, 3, DungeonGenerator.GroundType.grass, 0f, 0f, 0f, 0, 1, 2, 8 );
+    public static Biome Sea = new Biome( 0, 1, 2, 4, DungeonGenerator.GroundType.grass, 0f, 0f, 0f, 1, 1, 7, 10 );
+    public static Biome Marsh = new Biome( 0, 0, 0, 0, DungeonGenerator.GroundType.grass_dark, 0f, 0f, 0f, 10, 20, 2, 4 );
+    public static Biome Desert = new Biome( 0, 0, 0, 0, DungeonGenerator.GroundType.sand, 0f, 0f, 0f, 0, 2, 1, 2 );
 }

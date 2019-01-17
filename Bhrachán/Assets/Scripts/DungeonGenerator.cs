@@ -37,6 +37,7 @@ public class DungeonGenerator// : MonoBehaviour
         down,
         left,
         right
+
     }
 
     public struct Map
@@ -101,7 +102,7 @@ public class DungeonGenerator// : MonoBehaviour
                 for (int x = 0; x < dimensions.x; x++)
                 {
                     canPlaceObject[z][y][x] = true;
-                    ground[z][y][x] = GroundType.grass;
+                    ground[z][y][x] = biome.mainTerrain;
                     objects[z][y][x] = ObjectType.nothing;
                 }
             }
@@ -109,6 +110,8 @@ public class DungeonGenerator// : MonoBehaviour
         groundColors = new Dictionary<GroundType, System.Drawing.Color>();
         groundColors.Add(GroundType.grass, System.Drawing.Color.Green);
         groundColors.Add(GroundType.water, System.Drawing.Color.Blue);
+        groundColors.Add(GroundType.grass_dark, System.Drawing.Color.DarkGreen);
+        groundColors.Add(GroundType.sand, System.Drawing.Color.Gold);
         //TODO add more ground types
     }
 
@@ -119,8 +122,9 @@ public class DungeonGenerator// : MonoBehaviour
 
         //TODO generate a dungeon
 
-        GenerateRiver(0);
-        GenerateSea(0);
+        List<Vector2> seaMarkers = GenerateSea(0);
+        GenerateRiver(0, seaMarkers);
+        
 
 
         map.ground = ground;
@@ -132,11 +136,9 @@ public class DungeonGenerator// : MonoBehaviour
         return map;
     }
 
-    private void GenerateRiver(int _level)
+    private void GenerateRiver(int _level, List<Vector2> _seaMarkers)
     {
-        riverCount = Random.Range(biome.riverCountMin, biome.riverCountMax);
-
-        //int riverMarkerCount = Random.Range(Meta.DungeonGeneration.RIVER_MARKERS_MIN, Meta.DungeonGeneration.RIVER_MARKERS_MAX);
+        riverCount = Random.Range(biome.riverCountMin, biome.riverCountMax + 1);
 
         List<Vector2> riverMarkers;
 
@@ -152,10 +154,15 @@ public class DungeonGenerator// : MonoBehaviour
             //For now a river can only go from one edge to another
             //Starting somewhere in the middle will be implemented later
 
-            int startSide = Random.Range(0, 3);
+            int max = 4;
+            if(_seaMarkers.Count != 0)
+                max = 5;
+
+            int startSide = Random.Range(0, max);
             //  0
             //3   1
             //  2
+            //4 means connected to a sea
             switch(startSide)
             {
                 case 0:
@@ -170,15 +177,18 @@ public class DungeonGenerator// : MonoBehaviour
                 case 3:
                     start.x = 0;
                     break;
+                case 4:
+                    start = _seaMarkers[Random.Range(0, _seaMarkers.Count)];
+                    break;
             }
 
             if(startSide == 0 || startSide == 2)
             {
-                start.x = Random.Range(0, dimensions.x-1);
+                start.x = Random.Range(0, dimensions.x);
             }
             else if(startSide == 1 ||startSide == 3)
             {
-                start.y = Random.Range(0, dimensions.y-1);
+                start.y = Random.Range(0, dimensions.y);
             }
 
             
@@ -188,12 +198,13 @@ public class DungeonGenerator// : MonoBehaviour
             int endSide = startSide;
             while (endSide == startSide)
             {
-                endSide = Random.Range(0, 3);
+                endSide = Random.Range(0, max);
             }
             
             //  0
             //3   1
             //  2
+            //4 means connected to a sea
             switch(endSide)
             {
                 case 0:
@@ -208,15 +219,18 @@ public class DungeonGenerator// : MonoBehaviour
                 case 3:
                     end.x = 0;
                     break;
+                case 4:
+                    end = _seaMarkers[Random.Range(0, _seaMarkers.Count)];
+                    break;
             }
 
             if(endSide == 0 || endSide == 2)
             {
-                end.x = Random.Range(0, dimensions.x-1);
+                end.x = Random.Range(0, dimensions.x);
             }
             else if(endSide == 1 || endSide == 3)
             {
-                end.y = Random.Range(0, dimensions.y-1);
+                end.y = Random.Range(0, dimensions.y);
             }
 
             //Adding start und end onto the riverMarkers array
@@ -229,16 +243,12 @@ public class DungeonGenerator// : MonoBehaviour
             int loopCounter = 1;
 
             int stopper = Mathf.FloorToInt(
-                            //Mathf.Pow(
-                                //Mathf.Log10(
-                                    Mathf.Sqrt(Mathf.Pow(start.x - end.x, 2) + 
-                                    Mathf.Pow(start.y - end.y, 2))
-                                //)
-                            //, 3)
+                            Mathf.Sqrt(Mathf.Pow(start.x - end.x, 2) + 
+                            Mathf.Pow(start.y - end.y, 2))
                         ) ;
+
             while(!stop)
-            {
-                
+            {               
                 riverMarkersTemp.Add(riverMarkers[0]);
 
                 for(int index = 1; index < riverMarkers.Count; index++)
@@ -259,7 +269,7 @@ public class DungeonGenerator// : MonoBehaviour
                     {
                         //generating marker
 
-                        int closer = Util.CloserTo(index - 1, index, Mathf.CeilToInt(riverMarkers.Count/2));
+                        //int closer = Util.CloserTo(index - 1, index, Mathf.CeilToInt(riverMarkers.Count/2));
 
                         //if(closer == 0){ weightA = 3; weightB = 1; }
                         //else if(closer == 1){ weightA = 1; weightB = 3; }
@@ -274,17 +284,11 @@ public class DungeonGenerator// : MonoBehaviour
                         Vector2 dist = riverMarkers[index] - riverMarkers[index-1];
                         dist = new Vector2(dist.y, - dist.x);
                         dist.Normalize();
-                        dist *= (Random.Range(-DungeonGeneration.RIVER_NOISE, DungeonGeneration.RIVER_NOISE) 
+                        dist *= (Random.Range(-DungeonGeneration.RIVER_NOISE, DungeonGeneration.RIVER_NOISE + 1) 
                         / Mathf.Pow(DungeonGeneration.RIVER_NOISE_REDUCTION,loopCounter));
                         marker += dist;
                         marker.x = Mathf.FloorToInt(marker.x);
                         marker.y = Mathf.FloorToInt(marker.y);
-
-                        //marker.x = Mathf.Min(dimensions.x-1, marker.x);
-                        //marker.x = Mathf.Max(0, marker.x);
-
-                        //marker.y = Mathf.Min(dimensions.y-1, marker.y);
-                        //marker.y = Mathf.Max(0, marker.y);
 
                         riverMarkersTemp.Add(marker);
 
@@ -305,11 +309,11 @@ public class DungeonGenerator// : MonoBehaviour
                 loopCounter++;
             }
 
-            List<DirNum> dirNum = RiverExpansionLookup(Random.Range(biome.riverWidthMin, biome.riverWidthMax));
+            List<DirNum> dirNum = RiverExpansionLookup(Random.Range(biome.riverWidthMin, biome.riverWidthMax + 1));
             Vector2 curPos;
 
 
-            //maybe floor the coordinates of the markers before this step
+            //expand the river
             riverMarkersTemp.Clear();
             foreach(Vector2 v in riverMarkers)
             {
@@ -340,6 +344,7 @@ public class DungeonGenerator// : MonoBehaviour
 
             riverMarkers.AddRange(riverMarkersTemp);
 
+            //plant the river on the map
             for(int j = 0; j < riverMarkers.Count; j++)
             {
                 if(Mathf.FloorToInt(riverMarkers[j].y) >= 0 && 
@@ -350,15 +355,112 @@ public class DungeonGenerator// : MonoBehaviour
                     ground[_level][Mathf.FloorToInt(riverMarkers[j].y)][Mathf.FloorToInt(riverMarkers[j].x)] = GroundType.water;
                 }
             }
-
-            //ExportBitmap();
             
         }
     }
 
-    private void GenerateSea(int _level)
+    private List<Vector2> GenerateSea(int _level)
     {
+        int seaCount = Random.Range(biome.seaCountMin, biome.seaCountMax + 1);
+        List<Vector2> allSeaMarkers = new List<Vector2>();
 
+        for(int a = 0; a < seaCount; a++)
+        {
+            List<Vector2> oceanMarkers = new List<Vector2>();
+            HashSet<Vector2> oceanMarkersTemp = new HashSet<Vector2>();
+            Vector2 curPos;
+            //set random first point for the ocean
+            oceanMarkers.Add(new Vector2(
+                Random.Range(0, dimensions.x),
+                Random.Range(0, dimensions.y)
+            ));
+            int chance = 0;
+            int c = Random.Range(0, 101);
+            Direction pd = (Direction)Random.Range(0, 4);
+            //from the first point on there is generated a line of semi-random length and semi-random direciton
+            while(c > chance)
+            {
+                chance += 2;
+                c = Random.Range(0, 101);
+
+                Direction d = (Direction)Random.Range(0, 5);
+
+                int ch = Random.Range(0, 4);
+                if(ch < 4)
+                    d = pd;
+
+                
+                curPos = oceanMarkers[oceanMarkers.Count - 1];
+                
+                switch(d)
+                {
+                    case Direction.up:
+                        curPos.y++;
+                        break;
+                    case Direction.down:
+                        curPos.y--;
+                        break;
+                    case Direction.left:
+                        curPos.x--;
+                        break;
+                    case Direction.right:
+                        curPos.x++;
+                        break;
+                }
+                pd = d;
+                oceanMarkers.Add(curPos);
+            }
+
+            //the size of the sea is determined
+            int add = 4 * Random.Range(biome.seaSizeMin, biome.seaSizeMax + 1);
+
+            //all the ocean markers are generated (should actually be called sea markers, but whatevs)
+            for(int b = 0; b < add; b++)
+            {
+                foreach(Vector2 v in oceanMarkers)
+                {
+                    oceanMarkersTemp.Add(v);
+                    Direction d = (Direction)Random.Range(0, 4);
+                    curPos = v;
+
+                    switch(d)
+                    {
+                        case Direction.up:
+                            curPos.y++;
+                            break;
+                        case Direction.down:
+                            curPos.y--;
+                            break;
+                        case Direction.left:
+                            curPos.x--;
+                            break;
+                        case Direction.right:
+                            curPos.x++;
+                            break;
+                    }
+
+                    oceanMarkersTemp.Add(curPos);
+                }
+
+                oceanMarkers = new List<Vector2>(oceanMarkersTemp);
+                oceanMarkersTemp.Clear();
+            }
+
+            //mark sea(s) on map
+            for(int j = 0; j < oceanMarkers.Count; j++)
+            {
+                if(Mathf.FloorToInt(oceanMarkers[j].y) >= 0 && 
+                    Mathf.FloorToInt(oceanMarkers[j].y) < dimensions.y && 
+                    Mathf.FloorToInt(oceanMarkers[j].x) >= 0 &&
+                    Mathf.FloorToInt(oceanMarkers[j].x) < dimensions.x)
+                {     
+                    ground[_level][Mathf.FloorToInt(oceanMarkers[j].y)][Mathf.FloorToInt(oceanMarkers[j].x)] = GroundType.water;
+                }
+            }
+            allSeaMarkers.AddRange(oceanMarkers);
+        }
+
+        return allSeaMarkers;
     }
 
 
@@ -390,41 +492,6 @@ public class DungeonGenerator// : MonoBehaviour
     private static List<DirNum> RiverExpansionLookup(int _width)
     {
         List<DirNum> ret = new List<DirNum>();
-
-        /* switch(_width)
-        {
-            //insert more here
-            case 7:
-                ret.Add(new DirNum(Direction.left, 6));
-                ret.Add(new DirNum(Direction.down, 6));
-                ret.Add(new DirNum(Direction.right, 1));
-                goto case 4;
-            case 6:
-                ret.Add(new DirNum(Direction.right, 5));
-                ret.Add(new DirNum(Direction.up, 5));
-                ret.Add(new DirNum(Direction.left, 1));
-                goto case 3;
-            case 5:
-                ret.Add(new DirNum(Direction.left, 4));
-                ret.Add(new DirNum(Direction.down, 4));
-                ret.Add(new DirNum(Direction.right, 1));
-                goto case 4;
-            case 4:
-                ret.Add(new DirNum(Direction.right, 3));
-                ret.Add(new DirNum(Direction.up, 3));
-                ret.Add(new DirNum(Direction.left, 1));
-                goto case 3;
-            case 3:
-                ret.Add(new DirNum(Direction.left, 2));
-                ret.Add(new DirNum(Direction.down, 2));
-                ret.Add(new DirNum(Direction.right, 1));
-                goto case 2;
-            case 2:
-                ret.Add(new DirNum(Direction.right, 1));
-                ret.Add(new DirNum(Direction.up, 1));
-                ret.Add(new DirNum(Direction.left, 1));
-                break;
-        }*/
 
         for(int i = _width; i > 1; i--)
         {
